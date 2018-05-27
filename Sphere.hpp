@@ -1,4 +1,7 @@
-public class Sphere {
+#ifndef SPHERE_H_
+#define SPHERE_H_
+
+class Sphere {
 
   private:
     Vector position;
@@ -9,4 +12,6 @@ public class Sphere {
 
   public:
 
-}
+};
+
+#endif
