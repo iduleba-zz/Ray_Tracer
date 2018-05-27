@@ -2,6 +2,7 @@
 #define RAY_H_
 
 #include "Vector.hpp"
+#include "Sphere.hpp"
 
 class Ray {
 
@@ -10,7 +11,7 @@ class Ray {
     Vector direction;
 
   public:
-
+    bool Intersects(Sphere *S);
 };
 
 #endif

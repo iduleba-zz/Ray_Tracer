@@ -13,7 +13,8 @@ class Sphere {
     float B;
 
   public:
-
+    float GetRadius() const;
+    Vector GetPosition() const;
 };
 
 #endif
