@@ -9,3 +9,13 @@ Vector Vector::operator+(const Vector& v) const {
 
   return u;
 }
+
+Vector Vector::operator*(const float f) const {
+  Vector u;
+
+  u.x = this->x * f;
+  u.y = this->y * f;
+  u.z = this->z * f;
+
+  return u;
+}

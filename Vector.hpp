@@ -7,5 +7,6 @@ public class Vector {
 
   public:
     Vector operator+(const Vector& v) const;
+    Vector operator*(const float f) const;
 
 }
