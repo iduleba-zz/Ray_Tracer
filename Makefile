@@ -13,7 +13,7 @@ TEMP = temp
 FILES = Camera.cpp Light.cpp Ray.cpp Scene.cpp Sphere.cpp Vector.cpp
 OBJECTS = $(patsubst %.cpp,$(TEMP)/%.o,$(FILES))
 
-GCC = gcc
+GCC = g++
 
 all : $(OUTPUT)
 
