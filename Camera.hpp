@@ -1,7 +1,7 @@
 #ifndef CAMERA_H_
 #define CAMERA_H_
 
-#include "Vector"
+#include "Vector.hpp"
 
 class Camera {
 
