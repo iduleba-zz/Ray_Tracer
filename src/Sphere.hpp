@@ -6,13 +6,11 @@
 class Sphere {
 
   public:
-    Sphere(Vector position, float radius, float R, float G, float B);
+    Sphere(Vector position, float radius, Color color);
     ~Sphere();
     Vector position;
     float radius;
-    float R;
-    float G;
-    float B;
+    Color color;
 };
 
 #endif
