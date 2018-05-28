@@ -12,8 +12,7 @@ class Ray {
     Vector Position() const { return position;}
     Vector Direction() const { return direction;}
 
-    bool Intersects(Sphere *S);
-    Vector IntersectPosition(Sphere *S);
+    bool Intersects(Sphere *S, float *t1, float *t2);
 
   private:
     Vector position;

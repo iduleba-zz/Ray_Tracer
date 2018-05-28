@@ -7,8 +7,10 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
   Scene *scene = new Scene("Spheres.in");
-  Ray *ray = new Ray(new Vector(0,0,0),new Vector(0,0,1));
-  cout << ray->Intersects(scene->Spheres()[0]) << endl;
+  Ray *ray = new Ray(Vector(0,0,0),Vector(0,0,1));
+  float t1,t2;
+  cout << ray->Intersects(scene->Spheres()[0],&t1,&t2) << endl;
+  cout << "t1 = " << t1 << ", t2 = " << t2 << endl;
   return 0;
 }
 

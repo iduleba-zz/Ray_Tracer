@@ -69,3 +69,10 @@ float Vector::operator*(const Vector& v) const {
 float Vector::Magnitude() const{
   return sqrtf(this->x*this->x + this->y*this->y + this->z*this->z);
 }
+
+void Vector::Normalize() {
+  float mag = this->Magnitude();
+  x /= mag;
+  y /= mag;
+  z /= mag;
+}
