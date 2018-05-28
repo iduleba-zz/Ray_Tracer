@@ -36,6 +36,7 @@ Color* Camera::RayTrace(Scene *scene, Ray ray, Light *light){
     float t1, t2;
     bool ret = ray.Intersects(spheres[i], &t1, &t2);
     if (ret==true){
+      std::cout << "Yes!" << spheres[i]->Color_()->Red() << std::endl;
       return new Color(spheres[i]->Color_());
     }else{
       return new Color(255,255,255);
@@ -45,15 +46,15 @@ Color* Camera::RayTrace(Scene *scene, Ray ray, Light *light){
 
 Color** Camera::Render(Scene *scene, Light *light){
   Color **image = new Color*[width * height];
-  Color **pixel = image;
 
   float invWidth = 1 / float(width), invHeight = 1 / float(height);
   float fov = 30, aspectratio = width / float(height);
   float angle = tan(M_PI * 0.5 * fov / 180.);
 
   //Ray Tracing
+  int count = 0;
   for (unsigned y = 0; y < height; ++y) {
-    for (unsigned x = 0; x < width; ++x, ++pixel) {
+    for (unsigned x = 0; x < width; ++x, ++count) {
       //create ray from eye to pixel[x][y]
 
       float xx = (2 * ((x + 0.5) * invWidth) - 1) * angle * aspectratio;
@@ -68,9 +69,10 @@ Color** Camera::Render(Scene *scene, Light *light){
       Ray ray = Ray(*position, direction);
 
       //RayTracer algorithm
-      *pixel = RayTrace(scene, ray, light);
+      image[count] = RayTrace(scene, ray, light);
     }
   }
+  return image;
 }
 
 
@@ -80,7 +82,7 @@ void Camera::ExportPPM(Color ** image, const char* fileName){
   std::ofstream ofs(fileName, std::ios::out | std::ios::binary);
   ofs << "P6\n" << width << " " << height << "\n255\n";
   for (unsigned i = 0; i < width * height; ++i) {
-    ofs << image[i]->Red() << image[i]->Green() << image[i]->Blue();
+    ofs << (unsigned char) image[i]->Red() << (unsigned char) image[i]->Green() << (unsigned char) image[i]->Blue();
   }
   ofs.close();
 }

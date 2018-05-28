@@ -1,5 +1,8 @@
 #include <iostream>
 #include "Vector.hpp"
+#include "Camera.hpp"
+#include "Color.hpp"
+#include "Light.hpp"
 #include "Scene.hpp"
 #include "Ray.hpp"
 
@@ -11,13 +14,17 @@ int main(int argc, char* argv[]) {
   float t1,t2;
   cout << ray->Intersects(scene->Spheres()[0],&t1,&t2) << endl;
   cout << "t1 = " << t1 << ", t2 = " << t2 << endl;
+  Camera *cam = new Camera(new Vector(0,0,-10),new Vector(0,0,0),new Vector(0,0,1));
+  Color** color = cam->Render(scene, NULL);
+  cam->ExportPPM(color, "./untitled.ppm");
   return 0;
 }
 
 
 /*
 TODO list:
-27/05
-testar interseccao de ray com sphere!
-
+28/05
+testar
+  imagem imprimindo?
+  RayTracer
 */
