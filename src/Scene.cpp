@@ -2,6 +2,7 @@
 #include "Sphere.hpp"
 #include <vector>
 #include <iostream>
+#include <stdio.h>
 
 Scene::Scene(const char* file){
   // Reads the number of instances and the feature dimension
