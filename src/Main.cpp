@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
 /*
 TODO list:
 28/05
-testar
-  imagem imprimindo?
-  RayTracer
+Pegar a esfera mais proxima!
+Adiciona um role q quando ta dentro da esfera t1 tem q ser o raio certo
+2.2, 3, 4 e 5
 */

@@ -39,10 +39,11 @@ Color* Camera::RayTrace(Scene *scene, Ray ray, Light *light){
       //std::cout << "Yes!" << spheres[i]->Color_()->Red() << std::endl;
       return new Color(spheres[i]->Color_());
     }else{
-      std::cout << "No!" << spheres[i]->Color_()->Red() << std::endl;
-      return new Color(128,128,0);
+      //std::cout << "No!" << spheres[i]->Color_()->Red() << std::endl;
+
     }
   }
+  return new Color(50,200,100);
 }
 
 Color** Camera::Render(Scene *scene, Light *light){

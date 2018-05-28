@@ -15,6 +15,8 @@ Scene::Scene(const char* file){
 
   int ret = fscanf(f, "%i", &num_spheres);
 
+  printf("bsdwfuygdfhbwefb %d :",num_spheres);
+
 
   for (int instance = 0; instance < num_spheres; ++instance) {
 
