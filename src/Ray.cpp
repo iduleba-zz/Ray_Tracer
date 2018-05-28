@@ -4,8 +4,7 @@
 
 Ray::Ray(Vector position, Vector direction){
   this->position = position;
-  this->direction = direction;
-  this->direction.Normalize();
+  this->direction = direction.Normalize();
 }
 
 bool Ray::Intersects(Sphere *S, float *t1, float *t2){
