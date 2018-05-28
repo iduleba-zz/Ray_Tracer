@@ -7,10 +7,10 @@
 class Ray {
 
   private:
-    Vector position;
-    Vector direction;
 
   public:
+    Vector position;
+    Vector direction;
     bool Intersects(Sphere *S);
 };
 

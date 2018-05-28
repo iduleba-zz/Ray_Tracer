@@ -5,10 +5,9 @@
 
 class Light {
 
-  private:
+  public:
     Vector position;
     // optionally we can have a non-white colour
-  public:
 
 };
 

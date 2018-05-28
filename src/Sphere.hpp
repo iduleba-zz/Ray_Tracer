@@ -6,15 +6,13 @@
 class Sphere {
 
   private:
+
+  public:
     Vector position;
     float radius;
     float R;
     float G;
     float B;
-
-  public:
-    float GetRadius() const;
-    Vector GetPosition() const;
 };
 
 #endif
