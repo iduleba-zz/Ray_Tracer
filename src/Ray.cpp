@@ -1,5 +1,12 @@
 #include "Ray.hpp"
 
+Ray::Ray(Vector position, Vector direction) {
+
+  this->position = position;
+  this->direction = direction;
+  
+}
+
 bool Ray::Intersects(Sphere *S){
 
   Vector sphere_to_ray = S->position - this->position;

@@ -1,6 +1,12 @@
 #include "Vector.hpp"
 #include <math.h>
 
+Vector::Vector(float x, float y, float z) {
+  this->x = x;
+  this->y = y;
+  this->z = z;
+}
+
 Vector Vector::operator+(const Vector& v) const {
   Vector u;
 

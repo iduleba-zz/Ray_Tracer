@@ -5,9 +5,9 @@
 
 class Sphere {
 
-  private:
-
   public:
+    Sphere(Vector position, float radius, float R, float G, float B);
+    ~Sphere();
     Vector position;
     float radius;
     float R;

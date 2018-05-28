@@ -6,9 +6,9 @@
 
 class Ray {
 
-  private:
-
   public:
+    Ray(Vector position, Vector direction);
+    ~Ray();
     Vector position;
     Vector direction;
     bool Intersects(Sphere *S);

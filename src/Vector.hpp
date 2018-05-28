@@ -3,9 +3,9 @@
 
 class Vector {
 
-  private:
-
   public:
+    Vector(float x, float y, float z);
+    ~Vector();
     Vector operator+(const Vector& v) const;
     Vector operator-(const Vector& v) const;
     Vector operator*(const float f) const;
