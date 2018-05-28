@@ -9,6 +9,7 @@ class Vector {
     ~Vector() {};
     Vector operator+(const Vector& v) const;
     Vector operator-(const Vector& v) const;
+    Vector operator^(const Vector& v) const;
     Vector operator*(const float f) const;
     Vector operator/(const float f) const;
     float operator*(const Vector& v) const;
@@ -18,6 +19,7 @@ class Vector {
     float z;
 
     float Magnitude() const;
+    void Normalize();
 
 };
 

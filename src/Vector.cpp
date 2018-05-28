@@ -27,6 +27,17 @@ Vector Vector::operator-(const Vector& v) const {
   return u;
 }
 
+// Cross product
+Vector Vector::operator^(const Vector& v) const {
+  Vector u;
+
+  u.x = this->y * v.z - this->z * v.y;
+  u.y = this->z * v.x - this->x * v.z;
+  u.z = this->x * v.y - this->y * v.x;
+
+  return u;
+}
+
 Vector Vector::operator*(const float f) const {
   Vector u;
 

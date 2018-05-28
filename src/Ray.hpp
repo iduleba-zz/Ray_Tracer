@@ -7,16 +7,17 @@
 class Ray {
 
   public:
-    Ray(Vector *position, Vector *direction);
-    ~Ray();
-    Vector* Position() const { return position;}
-    Vector* Direction() const { return direction;}
+    Ray(Vector position, Vector direction);
+    ~Ray() {};
+    Vector Position() const { return position;}
+    Vector Direction() const { return direction;}
 
     bool Intersects(Sphere *S);
+    Vector IntersectPosition(Sphere *S);
 
   private:
-    Vector *position;
-    Vector *direction;
+    Vector position;
+    Vector direction;
 };
 
 #endif
