@@ -36,10 +36,11 @@ Color* Camera::RayTrace(Scene *scene, Ray ray, Light *light){
     float t1, t2;
     bool ret = ray.Intersects(spheres[i], &t1, &t2);
     if (ret==true){
-      std::cout << "Yes!" << spheres[i]->Color_()->Red() << std::endl;
+      //std::cout << "Yes!" << spheres[i]->Color_()->Red() << std::endl;
       return new Color(spheres[i]->Color_());
     }else{
-      return new Color(255,255,255);
+      std::cout << "No!" << spheres[i]->Color_()->Red() << std::endl;
+      return new Color(128,128,0);
     }
   }
 }
@@ -82,6 +83,8 @@ void Camera::ExportPPM(Color ** image, const char* fileName){
   std::ofstream ofs(fileName, std::ios::out | std::ios::binary);
   ofs << "P6\n" << width << " " << height << "\n255\n";
   for (unsigned i = 0; i < width * height; ++i) {
+    if(image[i]->Red() == 128)
+      std::cout << image[i]->Red() << "," << image[i]->Green() << "," <<image[i]->Blue() << std::endl;
     ofs << (unsigned char) image[i]->Red() << (unsigned char) image[i]->Green() << (unsigned char) image[i]->Blue();
   }
   ofs.close();
