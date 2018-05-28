@@ -4,13 +4,14 @@ RAY = Ray
 SCENE = Scene
 SPHERE = Sphere
 VECTOR = Vector
+COLOR = Color
 OUTPUT = rt
 
 BIN = bin
 SRC = src
 TEMP = temp
 
-FILES = $(CAMERA).cpp $(LIGHT).cpp $(RAY).cpp $(SCENE).cpp $(SPHERE).cpp $(VECTOR).cpp
+FILES = $(COLOR).cpp $(VECTOR).cpp $(CAMERA).cpp $(LIGHT).cpp $(SPHERE).cpp $(RAY).cpp $(SCENE).cpp
 OBJECTS = $(patsubst %.cpp,$(TEMP)/%.o,$(FILES))
 
 GCC = g++

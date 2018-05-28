@@ -12,13 +12,13 @@ Ray::~Ray(){
 
 bool Ray::Intersects(Sphere *S){
 
-  Vector sphere_to_ray = S->position - this->position;
+  Vector sphere_to_ray = *(S->Position()) - *(this->position);
 
-  float ray_magnitude = this->direction.Magnitude();
+  float ray_magnitude = this->direction->Magnitude();
 
-  Vector proj =  this->direction * (sphere_to_ray * this->direction) / (ray_magnitude * ray_magnitude);
+  Vector proj =  *(this->direction) * (sphere_to_ray * *(this->direction)) / (ray_magnitude * ray_magnitude);
 
-  if((sphere_to_ray - proj).Magnitude() > S->radius)
+  if((sphere_to_ray - proj).Magnitude() > S->Radius())
     return false;
 
   else if (sphere_to_ray * proj < 0)

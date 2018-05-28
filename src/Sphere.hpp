@@ -11,7 +11,7 @@ class Sphere {
     ~Sphere();
     Vector* Position() const { return position;};
     float Radius() const { return radius;};
-    Color* Color() const { return color;};
+    Color* Color_() const { return color;};
 
   private:
     Vector *position;

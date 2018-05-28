@@ -1,4 +1,7 @@
 #include "Scene.hpp"
+#include "Sphere.hpp"
+#include <vector>
+#include <iostream>
 
 Scene::Scene(const char* file){
   // Reads the number of instances and the feature dimension
@@ -11,7 +14,6 @@ Scene::Scene(const char* file){
 
   int ret = fscanf(f, "%i", &num_spheres);
 
-  spheres = new std::vector<Spheres*>(num_spheres);
 
   for (int instance = 0; instance < num_spheres; ++instance) {
 
@@ -21,7 +23,7 @@ Scene::Scene(const char* file){
     // Reads attributes
     ret = fscanf(f, "%f", &radius);
     ret = fscanf(f, "%i %i %i", &red, &green, &blue);
-    ret = fscanf(f, "%i %i %i", &x, &y, &z);
+    ret = fscanf(f, "%f %f %f", &x, &y, &z);
 
     Color *color = new Color(red, green, blue);
     Vector *position = new Vector(x, y, z);
@@ -38,5 +40,4 @@ Scene::~Scene(){
   for (unsigned int i = 0; i < spheres.size(); ++i) {
     delete(spheres[i]);
   }
-  delete spheres;
 }
