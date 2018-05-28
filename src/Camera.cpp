@@ -3,7 +3,7 @@
 float Camera::screen_width = 800;
 float Camera::screen_height = 600;
 
-Camera::Camera(Vector position, Vector target) : Camera(position, target, Vector(0,0,1)) {
+Camera::Camera(Vector position, Vector target) : Camera(position, target, new Vector(0,0,1)) {
 
 }
 
@@ -14,6 +14,12 @@ Camera::Camera(Vector position, Vector target, Vector up) {
 
   this->up = up;
 
+}
+
+Camera::~Camera(){
+  delete position;
+  delete target;
+  delete up;
 }
 
 Camera::Camera(Vector position, Vector target, Vector up, int screen_width, int screen_height) : Camera(position, target, up) {
