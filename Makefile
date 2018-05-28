@@ -11,7 +11,7 @@ BIN = bin
 SRC = src
 TEMP = temp
 
-FILES = $(COLOR).cpp $(VECTOR).cpp $(CAMERA).cpp $(LIGHT).cpp $(SPHERE).cpp $(RAY).cpp $(SCENE).cpp
+FILES = $(COLOR).cpp $(VECTOR).cpp $(LIGHT).cpp $(SPHERE).cpp $(RAY).cpp $(SCENE).cpp $(CAMERA).cpp
 OBJECTS = $(patsubst %.cpp,$(TEMP)/%.o,$(FILES))
 
 GCC = g++
