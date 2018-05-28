@@ -1,10 +1,13 @@
 #include "Ray.hpp"
 
-Ray::Ray(Vector position, Vector direction) {
-
+Ray::Ray(Vector *position, Vector *direction){
   this->position = position;
   this->direction = direction;
-  
+}
+
+Ray::~Ray(){
+  delete position;
+  delete direction;
 }
 
 bool Ray::Intersects(Sphere *S){

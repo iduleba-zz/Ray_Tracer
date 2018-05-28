@@ -2,15 +2,21 @@
 #define SPHERE_H_
 
 #include "Vector.hpp"
+#include "Color.hpp"
 
 class Sphere {
 
   public:
-    Sphere(Vector position, float radius, Color color);
+    Sphere(Vector *position, float radius, Color *color);
     ~Sphere();
-    Vector position;
+    Vector* Position() const { return position;};
+    float Radius() const { return radius;};
+    Color* Color() const { return color;};
+
+  private:
+    Vector *position;
     float radius;
-    Color color;
+    Color *color;
 };
 
 #endif
