@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
   float t1,t2;
   cout << ray->Intersects(scene->Spheres()[0],&t1,&t2) << endl;
   cout << "t1 = " << t1 << ", t2 = " << t2 << endl;
-  Camera *cam = new Camera(new Vector(0,0,-10),new Vector(0,0,0),new Vector(0,0,1));
+  Camera *cam = new Camera(new Vector(0,0,-10),new Vector(0,0,0),new Vector(1,0,0));
   Color** color = cam->Render(scene, NULL);
   cam->ExportPPM(color, "./untitled1.ppm");
   return 0;

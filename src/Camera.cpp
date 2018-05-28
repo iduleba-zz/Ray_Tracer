@@ -52,6 +52,14 @@ Color** Camera::Render(Scene *scene, Light *light){
   float fov = 30, aspectratio = width / float(height);
   float angle = tan(M_PI * 0.5 * fov / 180.);
 
+  Vector foward = (*target - *position);
+  std::cout << "Up: " << up->x << up->y << up->z << std::endl;
+  std::cout << "Fow: " << foward.x << foward.y << foward.z << std::endl;
+  foward.Normalize();
+  std::cout << "Fow N: " << foward.x << foward.y << foward.z << std::endl;
+  Vector right = (*up) ^ foward;
+  std::cout << "right: " << right.x << right.y << right.z << std::endl;
+
   //Ray Tracing
   int count = 0;
   for (unsigned y = 0; y < height; ++y) {
@@ -61,14 +69,11 @@ Color** Camera::Render(Scene *scene, Light *light){
       float xx = (2 * ((x + 0.5) * invWidth) - 1) * angle * aspectratio;
       float yy = (1 - 2 * ((y + 0.5) * invHeight)) * angle;
 
-      Vector foward = (*target - *position);
-      foward.Normalize();
-      Vector right = (*up) ^ foward;
-
       Vector direction = foward + (*up)*xx+ right*yy;
       direction.Normalize();
       Ray ray = Ray(*position, direction);
 
+      //std::cout << direction.x << direction.y << direction.z << std::endl;
       //RayTracer algorithm
       image[count] = RayTrace(scene, ray, light);
     }
@@ -83,8 +88,8 @@ void Camera::ExportPPM(Color ** image, const char* fileName){
   std::ofstream ofs(fileName, std::ios::out | std::ios::binary);
   ofs << "P6\n" << width << " " << height << "\n255\n";
   for (unsigned i = 0; i < width * height; ++i) {
-    if(image[i]->Red() == 128)
-      std::cout << image[i]->Red() << "," << image[i]->Green() << "," <<image[i]->Blue() << std::endl;
+    //if(image[i]->Red() == 128)
+      //std::cout << image[i]->Red() << "," << image[i]->Green() << "," <<image[i]->Blue() << std::endl;
     ofs << (unsigned char) image[i]->Red() << (unsigned char) image[i]->Green() << (unsigned char) image[i]->Blue();
   }
   ofs.close();
