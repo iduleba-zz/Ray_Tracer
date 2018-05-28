@@ -6,13 +6,15 @@
 
 class Light {
 
-  public:
-    Light(Vector position);
-    Light(Vector position, Color color);
-    ~Light();
-    Vector position;
+  private:
+    Vector *position;
     // optionally we can have a non-white colour
-    Color color;
+    Color *color;
+
+  public:
+    Light(Vector *position);
+    Light(Vector *position, Color *color);
+    ~Light();
 
 };
 
