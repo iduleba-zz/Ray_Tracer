@@ -9,9 +9,9 @@ class Camera {
     static int screen_width;
     static int screen_height;
 
-    Vector position;
-    Vector target;
-    Vector up;
+    Vector *position;
+    Vector *target;
+    Vector *up;
 
   public:
     Camera(Vector position, Vector target);
@@ -22,9 +22,9 @@ class Camera {
     static float ScreenHeight() { return Camera::screen_height; };
     static SetScreenDimensions(float screen_width, float screen_height);
 
-    Vector Position() { return position; };
-    Vector Target() { return target; };
-    Vector Up() { return up; };
+    Vector *Position() { return position; };
+    Vector *Target() { return target; };
+    Vector *Up() { return up; };
 
 };
 
