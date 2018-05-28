@@ -1,4 +1,5 @@
 #include "Ray.hpp"
+#include <iostream>
 
 Ray::Ray(Vector *position, Vector *direction){
   this->position = position;
@@ -12,19 +13,21 @@ Ray::~Ray(){
 
 bool Ray::Intersects(Sphere *S){
 
-  Vector sphere_to_ray = *(S->Position()) - *(this->position);
+  Vector ray_to_sphere = *(S->Position()) - *(this->position);
 
   float ray_magnitude = this->direction->Magnitude();
 
-  Vector proj =  *(this->direction) * (sphere_to_ray * *(this->direction)) / (ray_magnitude * ray_magnitude);
+  Vector proj =  (*(this->direction)) * (ray_to_sphere * (*(this->direction))) / (ray_magnitude * ray_magnitude);
 
-  if((sphere_to_ray - proj).Magnitude() > S->Radius())
-    return false;
+  // Case inside the sphere
+  if(ray_to_sphere.Magnitude() <= S->Radius())
+    return true;
 
-  else if (sphere_to_ray * proj < 0)
-    return false;
+  // Case outside the sphere but looking towards the sphere
+  else if(ray_to_sphere * (*(this->direction)) >= 0 && (ray_to_sphere - proj).Magnitude() <= S->Radius())
+    return true;
 
   else
-    return true;
+    return false;
 
 }
