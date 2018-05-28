@@ -10,14 +10,14 @@ class Scene {
 
   private:
     //set of spheres
-    std::vector<Spheres> spheres;
+    std::vector<Spheres*> spheres;
     int num_spheres;
 
   public:
     Scene(const char* file);
     ~Scene();
     int NumSpheres(){ return num_spheres;};
-    std::vector<Spheres> Spheres() { return spheres;};
+    std::vector<Spheres*> Spheres() { return spheres;};
 };
 
 #endif

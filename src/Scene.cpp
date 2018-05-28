@@ -10,7 +10,9 @@ Scene::Scene(const char* file){
   }
 
   int ret = fscanf(f, "%i", &num_spheres);
-  
+
+  spheres = new std::vector<Spheres*>(num_spheres);
+
   for (int instance = 0; instance < num_spheres; ++instance) {
 
     int red, green, blue;
@@ -36,4 +38,5 @@ Scene::~Scene(){
   for (unsigned int i = 0; i < spheres.size(); ++i) {
     delete(spheres[i]);
   }
+  delete spheres;
 }

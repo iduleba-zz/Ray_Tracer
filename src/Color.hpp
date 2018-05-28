@@ -11,7 +11,7 @@ class Color {
     int blue;
 
   public:
-    Color(int, int, int);
+    Color(int red, int green, int blue);
     ~Color();
     int Red() const { return red;};
     int Green() const { return green;};

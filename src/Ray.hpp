@@ -9,9 +9,9 @@ class Ray {
   public:
     Ray(Vector *position, Vector *direction);
     ~Ray();
-    Vector* Position() const { return position;};
-    Vector* Direction() const { return direction;};
-    
+    Vector* Position() const { return position;}
+    Vector* Direction() const { return direction;}
+
     bool Intersects(Sphere *S);
 
   private:
