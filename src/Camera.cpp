@@ -46,7 +46,8 @@ Color* Camera::RayTrace(Scene *scene, Ray ray){
   }
   if(t_min >= 0)
     //provisorio. Adicionar Phong
-    return new Color(spheres[sphere_index]->Color_());
+    //return new Color(spheres[sphere_index]->Color_());
+    return PhongReflection(spheres[sphere_index], ray.Direction() * t_min, scene );
   else
     return new Color(50,200,100);
 }

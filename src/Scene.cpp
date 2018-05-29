@@ -21,7 +21,7 @@ Scene::Scene(const char* file){
 
     // Reads attributes
     ret = fscanf(f, "%f", &radius);
-    ret = fscanf(f, "%f %f %f", &ka, &kd, &ks, &sh);
+    ret = fscanf(f, "%f %f %f %f", &ka, &kd, &ks, &sh);
     ret = fscanf(f, "%i %i %i", &red, &green, &blue);
     ret = fscanf(f, "%f %f %f", &x, &y, &z);
 
