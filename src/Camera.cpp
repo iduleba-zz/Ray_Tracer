@@ -93,3 +93,16 @@ Image* Camera::Render(Scene *scene){
   }
   return image;
 }
+
+Color* Camera::PhongReflection(Vector point, Scene* scene){
+
+  Vector normal = Normal(point);
+
+  vector<Vector*> light_rays;
+  for(int i = 0; i < NumSources; i++){
+    light_rays.push_back(scene.Sources().position - point);
+
+  }
+
+
+}

@@ -5,6 +5,11 @@
 #include "Color.hpp"
 #include <cmath>
 
+#define SPECULAR 0
+#define DIFUSE 1
+#define AMBIENT 2
+#define SHININESS 3
+
 class Sphere {
 
   public:
@@ -14,11 +19,13 @@ class Sphere {
     float Radius() const { return radius;};
     Color* Color_() const { return color;};
     Vector* Normal(Vector atPoint);
+    float4
 
   private:
     Vector *position;
     float radius;
     Color *color;
+    float4 reflection_constants;
 };
 
 #endif
