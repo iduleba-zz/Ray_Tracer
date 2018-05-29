@@ -68,6 +68,5 @@ TODO list:
 28/05
 2.2, 4 e 5
 29/05
-add different colors for each light source intensity
-implement sum of colors and product by scalar
+Phong model, consider whether the light goes through the same sphere on its way from the source to the point.
 */
