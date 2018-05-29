@@ -1,5 +1,4 @@
 #include "Camera.hpp"
-#include <limits>
 
 Camera::Camera(Vector *position, Vector *target) : Camera(position, target, new Vector(0,0,1)) {}
 
@@ -85,7 +84,11 @@ Image* Camera::Render(Scene *scene){
 
       //std::cout << direction.x << direction.y << direction.z << std::endl;
       //Call to the RayTracer algorithm
-      image->ImageSet(count, RayTrace(scene, ray));
+      try{
+        image->ImageSet(count, RayTrace(scene, ray));
+      }catch(int e){
+        std::cout << "Out of bounds! Index: " << count << std::endl;
+      }
     }
   }
   return image;

@@ -17,7 +17,7 @@ class Image {
 
     int ImageWidth() const { return width; };
     int ImageHeight() const { return height; };
-    void ImageSet(unsigned i, Color *color) { this->image[i] = color; };
+    void ImageSet(unsigned i, Color *color);
 
     //print image to a PPM file
     //http://manpages.ubuntu.com/manpages/xenial/man5/ppm.5.html

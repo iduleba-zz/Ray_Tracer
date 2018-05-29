@@ -66,5 +66,5 @@ TODO list:
 Pegar a esfera mais proxima!
 2.2, 3, 4 e 5
 29/05
-throw exception in ImageSet
+
 */

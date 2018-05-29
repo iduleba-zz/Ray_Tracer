@@ -15,6 +15,11 @@ Image::~Image(){
   }
 }
 
+void Image::ImageSet(unsigned i, Color *color) {
+  if (i>=width*height) throw -1;
+  this->image[i] = color;
+}
+
 // Save PPM image
 //fileName should be like "./untitled.ppm"
 void Image::ExportPPM(const char* fileName){
