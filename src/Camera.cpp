@@ -32,16 +32,9 @@ Color* Camera::RayTrace(Scene *scene, Ray ray){
   int sphere_index;
   for(int i=0; i<scene->NumSpheres(); i++){
     float t1, t2;
-    bool ret = ray.Intersects(spheres[i], &t1, &t2);
-    if (ret==true){
-      if(t1 < t_min || t_min == -1){
-        sphere_index = i;
-        t_min = t1;
-      }
-      //std::cout << "Yes!" << spheres[i]->Color_()->Red() << std::endl;
-    }else{
-      //std::cout << "No!" << spheres[i]->Color_()->Red() << std::endl;
-
+    if (ray.Intersects(spheres[i], &t1, &t2)==true && (t1 < t_min || t_min == -1)){
+      sphere_index = i;
+      t_min = t1;
     }
   }
   if(t_min >= 0)
@@ -53,7 +46,6 @@ Color* Camera::RayTrace(Scene *scene, Ray ray){
 }
 
 Image* Camera::Render(Scene *scene){
-  //Color **image = new Color*[width * height];
   Image *image = new Image(width, height);
 
   //coping with the geometry
@@ -124,9 +116,10 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
   Color diffuse_light = Color(0,0,0);
   Color specular_light = Color(0,0,0);
   for(int i = 0; i < scene->NumSources(); i++){
-    ambient_light = ambient_light + *(sources[i]->AmbientColor()) * sphere->ReflectionConstants()[AMBIENT];
-    specular_light = specular_light + (*(sources[i]->DiffuseColor())) * sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] );
-    diffuse_light = diffuse_light + (*(sources[i]->SpecularColor())) * sphere->ReflectionConstants()[DIFFUSE] * ( normal * source_rays[i] );
+    ambient_light += *(sources[i]->AmbientColor()) * sphere->ReflectionConstants()[AMBIENT];
+    float dot = point_to_camera * reflected_rays[i];
+    specular_light += (dot > 0) ? (*(sources[i]->DiffuseColor())) * sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] ) : 0;
+    diffuse_light += (*(sources[i]->SpecularColor())) * sphere->ReflectionConstants()[DIFFUSE] * ( normal * source_rays[i] );
   }
 
   return new Color(ambient_light + diffuse_light + specular_light);

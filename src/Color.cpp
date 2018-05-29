@@ -14,13 +14,13 @@ Color::Color(Color* color){
 }
 
 Color Color::operator+(const Color& c) const{
-
   return Color(this->red + c.red, this->green + c.green, this->blue + c.blue);
-
 }
 
-Color Color::operator*(const float& f) const {
-
+Color Color::operator*(const float& f) const{
   return Color(this->red * f, this->green * f, this->blue * f);
+}
 
+void Color::operator+=(const Color& v){
+  this->red = this->red + v.red; this->green = this->green + v.green; this->blue = this->blue + v.blue;
 }
