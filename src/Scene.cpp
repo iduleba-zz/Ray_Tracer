@@ -9,7 +9,7 @@ Scene::Scene(const char* file){
   FILE* f = fopen(file, "r");
   if (f ==  NULL) {
     fprintf(stderr, "ERR: Impossible to open %s\n", file);
-    return;
+    throw -1;
   }
 
   int ret = fscanf(f, "%i %i", &num_spheres, &num_sources);
