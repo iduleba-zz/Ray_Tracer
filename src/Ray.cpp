@@ -29,8 +29,8 @@ bool Ray::Intersects(Sphere *S, float *t1, float *t2){
   if(ray_to_sphere.Magnitude() <= S->Radius()) {
 
     delta = S->Radius() * S->Radius() - orth_magnitude * orth_magnitude;
-    *t1 = proj_magnitude - sqrtf(delta);
-    *t2 = proj_magnitude + sqrtf(delta);
+    *t2 = proj_magnitude - sqrtf(delta);
+    *t1 = proj_magnitude + sqrtf(delta);
 
     return true;
   }
