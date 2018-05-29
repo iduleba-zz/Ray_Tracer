@@ -102,17 +102,15 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
 
   vector<Light*> sources = scene->Sources();
 
-  //direction vectors from the point on the surface toward each light source
-  vector<Vector> source_rays;
+
+  vector<Vector> reflected_rays, source_rays;
   for(int i = 0; i < scene->NumSources(); i++){
+    //direction vectors from the point on the surface toward each light source
     Vector point_to_source = (*(sources[i]->Position()) - point);
     point_to_source.Normalize();
     source_rays.push_back(point_to_source);
-  }
 
-  // direction vectors representing the reflected rays from each light source
-  vector<Vector> reflected_rays;
-  for(int i = 0; i < scene->NumSources(); i++){
+    // direction vectors representing the reflected rays from each light source
     Vector proj = normal * (normal * source_rays[i]);
     reflected_rays.push_back(proj * 2 - source_rays[i]);
   }
@@ -127,7 +125,7 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
   Color specular_light = Color(0,0,0);
   for(int i = 0; i < scene->NumSources(); i++){
     ambient_light = ambient_light + *(sources[i]->AmbientColor()) * sphere->ReflectionConstants()[AMBIENT];
-    specular_light = specular_light + (*(sources[i]->DffuseColor())) * sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] );
+    specular_light = specular_light + (*(sources[i]->DiffuseColor())) * sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] );
     diffuse_light = diffuse_light + (*(sources[i]->SpecularColor())) * sphere->ReflectionConstants()[DIFFUSE] * ( normal * source_rays[i] );
   }
 

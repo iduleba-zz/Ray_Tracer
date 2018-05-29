@@ -14,7 +14,6 @@ class Light {
     Color *specular_color;
 
   public:
-    Light(Vector *position);
     Light(Vector *position, Color *ambient_color, Color *diffuse_color, Color *specular_color);
     ~Light();
     Color *AmbientColor() const { return ambient_color; };
