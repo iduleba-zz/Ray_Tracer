@@ -9,7 +9,9 @@ class Light {
   private:
     Vector *position;
     // optionally we can have a non-white colour
-    Color *color;
+    Color *ambient_color;
+    Color *diffuse_color;
+    Color *specular_color;
 
   public:
     Light(Vector *position);

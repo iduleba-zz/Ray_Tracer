@@ -2,9 +2,9 @@
 #include <algorithm>
 
 Color::Color(int red, int green, int blue){
-  this->red = red % 256;
-  this->green = green % 256;
-  this->blue = blue % 256;
+  this->red = max(0,min(255,red));
+  this->green = max(0,min(255,green));
+  this->blue = max(0,min(255,blue));
 }
 
 Color::Color(Color* color){

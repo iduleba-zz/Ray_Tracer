@@ -98,7 +98,7 @@ Image* Camera::Render(Scene *scene){
 
 Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
 
-  Vector *normal = sphere->Normal(point);
+  Vector normal = *(sphere->Normal(point));
 
   vector<Light*> sources = scene->Sources();
 
@@ -113,7 +113,7 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
   // direction vectors representing the reflected rays from each light source
   vector<Vector> reflected_rays;
   for(int i = 0; i < scene->NumSources(); i++){
-    Vector proj = (*normal) * ((*normal) * source_rays[i]);
+    Vector proj = normal * (normal * source_rays[i]);
     reflected_rays.push_back(proj * 2 - source_rays[i]);
   }
 
@@ -121,35 +121,16 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
   Vector point_to_camera = *(this->position) - point;
   point_to_camera.Normalize();
 
-  // Calculation of the ambient light
-  float ambient_light_red = 0; float ambient_light_blue = 0; float ambient_light_green = 0;
+  // Calculation of the ambient, diffuse and specular light
+  Color ambient_light = Color(0,0,0);
+  Color diffuse_light = Color(0,0,0);
+  Color specular_light = Color(0,0,0);
   for(int i = 0; i < scene->NumSources(); i++){
-    ambient_light_red += sphere->ReflectionConstants()[AMBIENT] * sources[i]->Color_()->Red();
-    ambient_light_green += sphere->ReflectionConstants()[AMBIENT] * sources[i]->Color_()->Green();
-    ambient_light_blue += sphere->ReflectionConstants()[AMBIENT] * sources[i]->Color_()->Blue();
+    ambient_light = ambient_light + *(sources[i]->Color_()) * sphere->ReflectionConstants()[AMBIENT];
+    specular_light = specular_light + (*(sources[i]->Color_())) * sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] );
+    diffuse_light = diffuse_light + (*(sources[i]->Color_())) * sphere->ReflectionConstants()[DIFFUSE] * ( normal * source_rays[i] );
   }
 
-  // Calculation of the diffuse light for all sources
-  float diffuse_light_red =0; float diffuse_light_green = 0; float diffuse_light_blue = 0;
-  for(int i = 0; i < scene->NumSources(); i++){
-    diffuse_light_red += sphere->ReflectionConstants()[DIFFUSE] * ( (*normal) * source_rays[i] ) * sources[i]->Color_()->Red();
-    diffuse_light_green += sphere->ReflectionConstants()[DIFFUSE] * ( (*normal) * source_rays[i] ) * sources[i]->Color_()->Green();
-    diffuse_light_blue += sphere->ReflectionConstants()[DIFFUSE] * ( (*normal) * source_rays[i] ) * sources[i]->Color_()->Blue();
-  }
-
-  // Calculation of the specular light for all sources
-  float specular_light_red = 0; float specular_light_green = 0; float specular_light_blue = 0;
-  for(int i = 0; i < scene->NumSources(); i++){
-    specular_light_red += sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] ) * sources[i]->Color_()->Red();
-    specular_light_blue += sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] ) * sources[i]->Color_()->Blue();
-    specular_light_green += sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] ) * sources[i]->Color_()->Green();
-
-  }
-
-  float red = ambient_light_red + diffuse_light_red + specular_light_red;
-  float green = ambient_light_green + diffuse_light_green + specular_light_green;
-  float blue = ambient_light_blue + diffuse_light_blue + specular_light_blue;
-  delete normal;
-  return new Color((int)red,(int)green,(int)blue);
+  return new Color(ambient_light + diffuse_light + specular_light);
 
 }
