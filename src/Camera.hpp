@@ -19,6 +19,9 @@ class Camera{
     Vector *target;
     Vector *up;
 
+    //RayTracer
+    Color* RayTrace(Scene *scene, Ray ray);
+
   public:
     Camera(Vector *position, Vector *target);
     Camera(Vector *position, Vector *target, Vector *up);
@@ -35,9 +38,6 @@ class Camera{
 
     //compute the image
     Image* Render(Scene *scene);
-
-    //RayTracer
-    Color* RayTrace(Scene *scene, Ray ray);
 
 };
 

@@ -3,7 +3,7 @@
 Image::Image(int width, int height){
   this->width = width;
   this->height = height;
-  this->image = new Color*[width*height];;
+  this->image = new Color*[width*height];
 }
 
 Image::~Image(){
@@ -11,7 +11,7 @@ Image::~Image(){
     for (unsigned i = 0; i < width * height; ++i) {
       delete image[i];
     }
-    delete image;
+    delete[] image;
   }
 }
 
