@@ -37,11 +37,14 @@ Color* Camera::RayTrace(Scene *scene, Ray ray){
       t_min = t1;
     }
   }
-  if(t_min >= 0)
-    //provisorio. Adicionar Phong
-    //return new Color(spheres[sphere_index]->Color_());
-    return PhongReflection(spheres[sphere_index], ray.Position() + ray.Direction() * t_min, scene );
+  if(t_min >= 0){
+    Color mesh_color = Color(spheres[sphere_index]->Color_());
+    Color *illumination = PhongReflection(spheres[sphere_index], ray.Position() + ray.Direction() * t_min, scene );
+    *illumination = *illumination + mesh_color;
+    return illumination;
+  }
   else
+  //return Background color;
     return new Color(50,200,100);
 }
 
@@ -90,7 +93,7 @@ Image* Camera::Render(Scene *scene){
 
 Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
 
-  Vector normal = *(sphere->Normal(point));
+  Vector *normal = (sphere->Normal(point));
 
   vector<Light*> sources = scene->Sources();
 
@@ -103,7 +106,7 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
     source_rays.push_back(point_to_source);
 
     // direction vectors representing the reflected rays from each light source
-    Vector proj = normal * (normal * source_rays[i]);
+    Vector proj = (*normal) * ((*normal) * source_rays[i]);
     reflected_rays.push_back(proj * 2 - source_rays[i]);
   }
 
@@ -119,9 +122,9 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
     ambient_light += *(sources[i]->AmbientColor()) * sphere->ReflectionConstants()[AMBIENT];
     float dot = point_to_camera * reflected_rays[i];
     specular_light += (dot > 0) ? (*(sources[i]->DiffuseColor())) * sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] ) : Color(0,0,0);
-    diffuse_light += (*(sources[i]->SpecularColor())) * sphere->ReflectionConstants()[DIFFUSE] * ( normal * source_rays[i] );
+    diffuse_light += (*(sources[i]->SpecularColor())) * sphere->ReflectionConstants()[DIFFUSE] * ( (*normal) * source_rays[i] );
   }
 
+  delete normal;
   return new Color(ambient_light + diffuse_light + specular_light);
-
 }
