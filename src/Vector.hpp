@@ -7,6 +7,7 @@ class Vector {
 
   public:
     Vector(float x, float y, float z);
+    Vector(const Vector& v);
     Vector() {};
     ~Vector() {};
     Vector operator+(const Vector& v) const;

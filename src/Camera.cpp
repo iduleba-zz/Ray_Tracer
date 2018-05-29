@@ -1,4 +1,5 @@
 #include "Camera.hpp"
+#include <limits>
 
 Camera::Camera(Vector *position, Vector *target) : Camera(position, target, new Vector(0,0,1)) {}
 
@@ -28,18 +29,26 @@ void Camera::SetScreenDimensions(int width, int height){
 
 Color* Camera::RayTrace(Scene *scene, Ray ray){
   std::vector<Sphere*> spheres = scene->Spheres();
+  float t_min = -1;
+  int sphere_index;
   for(int i=0; i<scene->NumSpheres(); i++){
     float t1, t2;
     bool ret = ray.Intersects(spheres[i], &t1, &t2);
     if (ret==true){
+      if(t1 < t_min || t_min == -1){
+        sphere_index = i;
+        t_min = t1;
+      }
       //std::cout << "Yes!" << spheres[i]->Color_()->Red() << std::endl;
-      return new Color(spheres[i]->Color_());
     }else{
       //std::cout << "No!" << spheres[i]->Color_()->Red() << std::endl;
 
     }
   }
-  return new Color(50,200,100);
+  if(t_min >= 0)
+    return new Color(spheres[sphere_index]->Color_());
+  else
+    return new Color(50,200,100);
 }
 
 Image* Camera::Render(Scene *scene){

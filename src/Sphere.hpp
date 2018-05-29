@@ -3,6 +3,7 @@
 
 #include "Vector.hpp"
 #include "Color.hpp"
+#include <cmath>
 
 class Sphere {
 
@@ -12,7 +13,7 @@ class Sphere {
     Vector* Position() const { return position;};
     float Radius() const { return radius;};
     Color* Color_() const { return color;};
-    Vector Normal(Vector atPoint);
+    Vector* Normal(Vector atPoint);
 
   private:
     Vector *position;

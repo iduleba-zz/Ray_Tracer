@@ -6,6 +6,12 @@ Vector::Vector(float x, float y, float z) {
   this->z = z;
 }
 
+Vector::Vector(const Vector& v) {
+  this->x = v.x;
+  this->y = v.y;
+  this->z = v.z;
+}
+
 Vector Vector::operator+(const Vector& v) const {
   Vector u;
 
