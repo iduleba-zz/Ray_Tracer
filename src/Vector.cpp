@@ -1,5 +1,4 @@
 #include "Vector.hpp"
-#include <math.h>
 
 Vector::Vector(float x, float y, float z) {
   this->x = x;

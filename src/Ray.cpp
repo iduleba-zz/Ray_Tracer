@@ -1,6 +1,4 @@
 #include "Ray.hpp"
-#include <iostream>
-#include <math.h>
 
 Ray::Ray(Vector position, Vector direction){
   this->position = position;

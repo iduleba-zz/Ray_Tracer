@@ -3,16 +3,17 @@
 
 #include "Vector.hpp"
 #include "Color.hpp"
+#include "Image.hpp"
 #include "Scene.hpp"
-#include "Light.hpp"
 #include "Ray.hpp"
 #include <vector>
+#include <math.h>
 
-class Camera {
+class Camera{
 
   private:
-    static int width;
-    static int height;
+    int width;
+    int height;
 
     Vector *position;
     Vector *target;
@@ -24,23 +25,19 @@ class Camera {
     Camera(Vector *position, Vector *target, Vector *up, int width, int height);
     ~Camera();
 
-    static float ScreenWidth() { return Camera::width; };
-    static float ScreenHeight() { return Camera::height; };
-    static void SetScreenDimensions(int width, int height);
+    int ScreenWidth() const { return Camera::width; };
+    int ScreenHeight() const { return Camera::height; };
+    void SetScreenDimensions (int width, int height);
 
     Vector *Position() const { return position; };
     Vector *Target() const { return target; };
     Vector *Up() const { return up; };
 
     //compute the image
-    Color** Render(Scene *scene, Light *light);
+    Image* Render(Scene *scene);
 
     //RayTracer
-    Color* RayTrace(Scene *scene, Ray ray, Light *light);
-
-    //print image to a PPM file
-    //http://manpages.ubuntu.com/manpages/xenial/man5/ppm.5.html
-    void ExportPPM(Color** img, const char* fileName);
+    Color* RayTrace(Scene *scene, Ray ray);
 
 };
 

@@ -1,12 +1,11 @@
 #include "Scene.hpp"
-#include "Sphere.hpp"
-#include <vector>
-#include <iostream>
-#include <stdio.h>
 
 Scene::Scene(const char* file){
   // Reads the number of instances and the feature dimension
   // from the input file
+
+  num_spheres = 0;
+  num_sources = 0;
   FILE* f = fopen(file, "r");
   if (f ==  NULL) {
     fprintf(stderr, "ERR: Impossible to open %s\n", file);
@@ -14,9 +13,6 @@ Scene::Scene(const char* file){
   }
 
   int ret = fscanf(f, "%i", &num_spheres);
-
-  printf("bsdwfuygdfhbwefb %d :",num_spheres);
-
 
   for (int instance = 0; instance < num_spheres; ++instance) {
 
@@ -40,7 +36,14 @@ Scene::Scene(const char* file){
 }
 
 Scene::~Scene(){
-  for (unsigned int i = 0; i < spheres.size(); ++i) {
-    delete(spheres[i]);
+  if(num_spheres!=0){
+    for (unsigned int i = 0; i < spheres.size(); ++i) {
+      delete(spheres[i]);
+    }
+  }
+  if(num_sources!=0){
+    for (unsigned int i = 0; i < sources.size(); ++i) {
+      delete(sources[i]);
+    }
   }
 }

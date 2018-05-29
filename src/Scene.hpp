@@ -3,8 +3,10 @@
 
 #include "Vector.hpp"
 #include "Sphere.hpp"
+#include "Light.hpp"
 #include <vector>
 #include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
@@ -14,12 +16,16 @@ class Scene {
     //set of spheres
     std::vector<Sphere*> spheres;
     int num_spheres;
+    std::vector<Light*> sources;
+    int num_sources;
 
   public:
     Scene(const char* file);
     ~Scene();
-    int NumSpheres(){ return num_spheres;};
-    std::vector<Sphere*> Spheres() { return spheres;};
+    int NumSpheres() const { return num_spheres;};
+    int NumSources() const { return num_sources;};
+    std::vector<Sphere*> Spheres() const { return spheres;};
+    std::vector<Light*> Sources() const { return sources;};
 };
 
 #endif

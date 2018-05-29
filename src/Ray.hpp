@@ -3,6 +3,8 @@
 
 #include "Vector.hpp"
 #include "Sphere.hpp"
+#include <iostream>
+#include <math.h>
 
 class Ray {
 
