@@ -16,7 +16,7 @@ Image::~Image(){
 }
 
 void Image::ImageSet(unsigned i, Color *color) {
-  if (i>=width*height) throw -1;
+  if (i>=width*height) throw -i;
   this->image[i] = color;
 }
 

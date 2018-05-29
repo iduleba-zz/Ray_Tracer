@@ -13,6 +13,12 @@ Color::Color(Color* color){
   this->blue = color->blue;
 }
 
+Color::Color(const Color &color){
+  this->red = color.red;
+  this->green = color.green;
+  this->blue = color.blue;
+}
+
 Color Color::operator+(const Color& c) const{
   return Color(this->red + c.red, this->green + c.green, this->blue + c.blue);
 }

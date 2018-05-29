@@ -65,8 +65,7 @@ int main(int argc, char* argv[]) {
 
 /*
 TODO list:
-28/05
-2.2, 4 e 5
 29/05
-Phong model, consider whether the light goes through the same sphere on its way from the source to the point.
+4 e 5
+olhar a precisao 0.001???
 */

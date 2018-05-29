@@ -21,7 +21,7 @@ class Sphere {
     Color* Color_() const { return color;};
     float* ReflectionConstants() const {return reflection_constants;};
 
-    Vector* Normal(Vector atPoint);
+    Vector Normal(Vector atPoint);
 
   private:
     Vector *position;

@@ -18,12 +18,12 @@ Sphere::~Sphere() {
   delete[] reflection_constants;
 }
 
-Vector* Sphere::Normal(Vector at_point){
+Vector Sphere::Normal(Vector at_point){
   Vector radial = at_point - *(this->position);
-  if(fabs(radial.Magnitude() - radius) > 0.0001)
-    throw -1;
+  if(fabs(radial.Magnitude() - radius) > 0.01)
+    throw 666;
   else {
     radial.Normalize();
-    return new Vector(radial);
+    return radial;
   }
 }

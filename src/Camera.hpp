@@ -24,6 +24,10 @@ class Camera{
 
     Color* PhongReflection(Sphere *sphere, Vector point, Scene* scene);
 
+    Sphere* ClosestSphere(Scene *scene, Ray ray, float *t_min, Sphere* sphere);
+
+    Color Reflection(Sphere *sphere, Vector point, Scene* scene, Vector incoming_ray, float r);
+
   public:
     Camera(Vector *position, Vector *target);
     Camera(Vector *position, Vector *target, Vector *up);
