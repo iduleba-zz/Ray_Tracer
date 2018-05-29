@@ -17,10 +17,11 @@ Scene::Scene(const char* file){
   for (int instance = 0; instance < num_spheres; ++instance) {
 
     int red, green, blue;
-    float radius, x, y, z;
+    float radius, x, y, z, ka, kd, ks, sh;
 
     // Reads attributes
     ret = fscanf(f, "%f", &radius);
+    ret = fscanf(f, "%f %f %f", &ka, &kd, &ks, &sh);
     ret = fscanf(f, "%i %i %i", &red, &green, &blue);
     ret = fscanf(f, "%f %f %f", &x, &y, &z);
 
@@ -28,7 +29,7 @@ Scene::Scene(const char* file){
     Vector *position = new Vector(x, y, z);
 
     // Creates an object for the new instance
-    Sphere* sphere = new Sphere(position, radius, color);
+    Sphere* sphere = new Sphere(position, radius, color, ka, kd, ks, sh);
 
     spheres.push_back(sphere);
   }

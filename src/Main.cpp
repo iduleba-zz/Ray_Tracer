@@ -12,7 +12,7 @@ void printHelp(){
   cout <<"The first line contains the number of spheres and the number of sources in the file.\n" << endl;
   cout <<"For each sphere, four lines will be read:" << endl;
   cout <<"radius(float)" << endl;
-  cout <<"ks(float) kd(float) ka(float) sh(float) -> reflection parameters" << endl;
+  cout <<"ka(float) kd(float) ks(float) sh(float) -> reflection parameters" << endl;
   cout <<"Red(0-255) Green(0-255) Blue(0-255) -> color of the sphere" << endl;
   cout <<"x(float) y(float) z(float) -> coordinates of the center\n" << endl;
   cout <<"Then, for each source, two lines will be read:" << endl;
