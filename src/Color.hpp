@@ -19,6 +19,7 @@ class Color {
     int Blue() const { return blue;};
     Color operator+(const Color& v) const;
     void operator+=(const Color& v) { this->red = this->red + v.red; this->green = this->green + v.green; this->blue = this->blue + v.blue; };
+    void operator+=(const Color& v) const { this->red = this->red + v.red; this->green = this->green + v.green; this->blue = this->blue + v.blue; };
     Color operator*(const float& f) const;
 };
 
