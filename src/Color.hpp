@@ -17,7 +17,8 @@ class Color {
     int Red() const { return red;};
     int Green() const { return green;};
     int Blue() const { return blue;};
-
+    Color operator+(const Color& v) const;
+    Color operator*(const float& f) const;
 };
 
 #endif
