@@ -20,7 +20,7 @@ GCC = g++
 all : $(OUTPUT)
 
 $(OUTPUT) : $(OBJECTS) $(TEMP)/Main.o
-	$(GCC) $(INCLUDES) -o $(BIN)/$@ $^ $(LIBS)
+	$(GCC) -g $(INCLUDES) -o $(BIN)/$@ $^ $(LIBS)
 
 $(TEMP)/%.o: $(SRC)/%.cpp
 	$(GCC) -c $< -o $@
