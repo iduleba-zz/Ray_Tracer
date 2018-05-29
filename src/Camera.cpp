@@ -91,6 +91,36 @@ Image* Camera::Render(Scene *scene){
   return image;
 }
 
+
+//TODO
+Color* Camera::Reflection(Sphere *sphere, Vector point, Scene* scene, Color *cs){
+
+  float r;
+
+  Color* c = PhongReflection(sphere, point, scene);
+
+  if(c < 0.1)
+    return cs;
+
+  Color *cr = r *  + (1-r) * cs;
+
+  Ray reflected;
+  for(int i = 0; i < scene->NumSpheres(); ++i){
+
+    if(reflected.Intersects())
+
+  }
+
+
+    // if intensidade é maior q um delta
+    // calcula o raio refletido, que é o espelhado do que chega em relacao a normal.
+    // testa se esse raio intersecta uma esfera
+    // chama PhongReflection na esfera que o raio intersectou
+    // no final faz a conta somando a cor calculada da cor do nego.
+  PhongReflection(sphere, point, scene)
+
+}
+
 Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
 
   Vector *normal = (sphere->Normal(point));
@@ -143,6 +173,9 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
     diffuse_light = diffuse_light*shadow_coef3;
   }
 
+
+
   delete normal;
+
   return new Color(ambient_light + diffuse_light + specular_light);
 }
