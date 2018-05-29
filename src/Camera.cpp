@@ -47,7 +47,7 @@ Color* Camera::RayTrace(Scene *scene, Ray ray){
   if(t_min >= 0)
     //provisorio. Adicionar Phong
     //return new Color(spheres[sphere_index]->Color_());
-    return PhongReflection(spheres[sphere_index], ray.Direction() * t_min, scene );
+    return PhongReflection(spheres[sphere_index], ray.Position() + ray.Direction() * t_min, scene );
   else
     return new Color(50,200,100);
 }
@@ -113,7 +113,7 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
   // direction vectors representing the reflected rays from each light source
   vector<Vector> reflected_rays;
   for(int i = 0; i < scene->NumSources(); i++){
-    Vector proj = normal * (normal * reflected_rays[i]);
+    Vector proj = normal * (normal * source_rays[i]);
     reflected_rays.push_back(proj * 2 - source_rays[i]);
   }
 
@@ -150,6 +150,6 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
   float green = ambient_light_green + diffuse_light_green + specular_light_green;
   float blue = ambient_light_blue + diffuse_light_blue + specular_light_blue;
 
-  return new Color(red,green,blue);
+  return new Color((int)red,(int)green,(int)blue);
 
 }
