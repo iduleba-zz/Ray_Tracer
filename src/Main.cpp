@@ -22,9 +22,9 @@ int main(int argc, char* argv[]) {
     return -1;
   }
 
-  const char* test_file = argv[2];
-  const char* outputImg = argv[3];
-cout << test_file << endl;cout << outputImg << endl;
+  const char* test_file = argv[1];
+  const char* outputImg = argv[2];
+
   Scene *scene = new Scene(test_file);
 
   //test intersection
@@ -52,7 +52,6 @@ cout << test_file << endl;cout << outputImg << endl;
 TODO list:
 28/05
 Pegar a esfera mais proxima!
-Adiciona um role q quando ta dentro da esfera t1 tem q ser o raio certo
 2.2, 3, 4 e 5
 29/05
 throw exception in ImageSet

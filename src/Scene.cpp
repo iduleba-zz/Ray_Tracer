@@ -12,7 +12,7 @@ Scene::Scene(const char* file){
     return;
   }
 
-  int ret = fscanf(f, "%i", &num_spheres);
+  int ret = fscanf(f, "%i %i", &num_spheres, &num_sources);
 
   for (int instance = 0; instance < num_spheres; ++instance) {
 
@@ -32,6 +32,25 @@ Scene::Scene(const char* file){
 
     spheres.push_back(sphere);
   }
+
+  for (int instance = 0; instance < num_sources; ++instance) {
+
+    int red, green, blue;
+    float x, y, z;
+
+    // Reads attributes
+    ret = fscanf(f, "%i %i %i", &red, &green, &blue);
+    ret = fscanf(f, "%f %f %f", &x, &y, &z);
+
+    Color *color = new Color(red, green, blue);
+    Vector *position = new Vector(x, y, z);
+
+    // Creates an object for the new instance
+    Light* source = new Light(position, color);
+
+    sources.push_back(source);
+  }
+
   fclose(f);
 }
 
