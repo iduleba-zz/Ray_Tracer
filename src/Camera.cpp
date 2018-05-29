@@ -126,9 +126,9 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
   Color diffuse_light = Color(0,0,0);
   Color specular_light = Color(0,0,0);
   for(int i = 0; i < scene->NumSources(); i++){
-    ambient_light = ambient_light + *(sources[i]->Color_()) * sphere->ReflectionConstants()[AMBIENT];
-    specular_light = specular_light + (*(sources[i]->Color_())) * sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] );
-    diffuse_light = diffuse_light + (*(sources[i]->Color_())) * sphere->ReflectionConstants()[DIFFUSE] * ( normal * source_rays[i] );
+    ambient_light = ambient_light + *(sources[i]->AmbientColor()) * sphere->ReflectionConstants()[AMBIENT];
+    specular_light = specular_light + (*(sources[i]->DffuseColor())) * sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] );
+    diffuse_light = diffuse_light + (*(sources[i]->SpecularColor())) * sphere->ReflectionConstants()[DIFFUSE] * ( normal * source_rays[i] );
   }
 
   return new Color(ambient_light + diffuse_light + specular_light);
