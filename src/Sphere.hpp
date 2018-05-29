@@ -13,19 +13,21 @@
 class Sphere {
 
   public:
-    Sphere(Vector *position, float radius, Color *color);
+    Sphere(Vector *position, float radius, Color *color, float ks, float kd, float ka, float sh);
     ~Sphere();
+
     Vector* Position() const { return position;};
     float Radius() const { return radius;};
     Color* Color_() const { return color;};
+    float* ReflectionConstants() const {return reflection_constants;};
+
     Vector* Normal(Vector atPoint);
-    float4
 
   private:
     Vector *position;
     float radius;
     Color *color;
-    float4 reflection_constants;
+    float *reflection_constants;
 };
 
 #endif

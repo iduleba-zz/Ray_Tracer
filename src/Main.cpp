@@ -10,11 +10,12 @@ void printHelp(){
   cout <<"Usage: ./rt spheres_file ./output_img.ppm\n" << endl;
   cout <<"The input file must have the following format:\n" << endl;
   cout <<"The first line contains the number of spheres and the number of sources in the file.\n" << endl;
-  cout <<"For each sphere, three lines will be read:" << endl;
+  cout <<"For each sphere, four lines will be read:" << endl;
   cout <<"radius(float)" << endl;
+  cout <<"ks(float) kd(float) ka(float) sh(float) -> reflection parameters" << endl;
   cout <<"Red(0-255) Green(0-255) Blue(0-255) -> color of the sphere" << endl;
   cout <<"x(float) y(float) z(float) -> coordinates of the center\n" << endl;
-  cout <<"For each source, two lines will be read:" << endl;
+  cout <<"Then, for each source, two lines will be read:" << endl;
   cout <<"Red(0-255) Green(0-255) Blue(0-255) -> color of the light" << endl;
   cout <<"x(float) y(float) z(float) -> position of the source\n" << endl;
 }
@@ -65,5 +66,7 @@ TODO list:
 28/05
 2.2, 3, 4 e 5
 29/05
-
+ler do arquivo os coeficientes
+add different colors for each light source intensity
+implement sum of colors and product by scalar
 */
