@@ -15,8 +15,10 @@ void printHelp(){
   cout <<"ka(float) kd(float) ks(float) sh(float) -> reflection parameters" << endl;
   cout <<"Red(0-255) Green(0-255) Blue(0-255) -> color of the sphere" << endl;
   cout <<"x(float) y(float) z(float) -> coordinates of the center\n" << endl;
-  cout <<"Then, for each source, two lines will be read:" << endl;
-  cout <<"Red(0-255) Green(0-255) Blue(0-255) -> color of the light" << endl;
+  cout <<"Then, for each source, four lines will be read:" << endl;
+  cout <<"Red(0-255) Green(0-255) Blue(0-255) -> ambient component of the light" << endl;
+  cout <<"Red(0-255) Green(0-255) Blue(0-255) -> diffuse component of the light" << endl;
+  cout <<"Red(0-255) Green(0-255) Blue(0-255) -> specular component of the light" << endl;
   cout <<"x(float) y(float) z(float) -> position of the source\n" << endl;
 }
 

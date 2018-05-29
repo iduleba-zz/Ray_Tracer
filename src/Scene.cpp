@@ -1,4 +1,4 @@
-#include "Scene.hpp"
+specular#include "Scene.hpp"
 
 Scene::Scene(const char* file){
   // Reads the number of instances and the feature dimension
@@ -36,18 +36,24 @@ Scene::Scene(const char* file){
 
   for (int instance = 0; instance < num_sources; ++instance) {
 
-    int red, green, blue;
+    int red_ambient, green_ambient, blue_ambient;
+    int red_diffuse, green_diffuse, blue_diffuse;
+    int red_specular, green_specular, blue_specular;
     float x, y, z;
 
     // Reads attributes
-    ret = fscanf(f, "%i %i %i", &red, &green, &blue);
+    ret = fscanf(f, "%i %i %i", &red_ambient, &green_ambient, &blue_ambient);
+    ret = fscanf(f, "%i %i %i", &red_diffuse, &green_diffuse, &blue_diffuse);
+    ret = fscanf(f, "%i %i %i", &red_specular, &green_specular, &blue_specular);
     ret = fscanf(f, "%f %f %f", &x, &y, &z);
 
-    Color *color = new Color(red, green, blue);
+    Color *color_ambient = new Color(red_ambient, green_ambient, blue_ambient);
+    Color *color_diffuse = new Color(red_diffuse, green_diffuse, blue_diffuse);
+    Color *color_specular = new Color(red_specular, green_specular, blue_specular);
     Vector *position = new Vector(x, y, z);
 
     // Creates an object for the new instance
-    Light* source = new Light(position, color);
+    Light* source = new Light(position, color_ambient, color_diffuse, color_specular);
 
     sources.push_back(source);
   }
