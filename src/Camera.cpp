@@ -118,7 +118,7 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
   for(int i = 0; i < scene->NumSources(); i++){
     ambient_light += *(sources[i]->AmbientColor()) * sphere->ReflectionConstants()[AMBIENT];
     float dot = point_to_camera * reflected_rays[i];
-    specular_light += (dot > 0) ? (*(sources[i]->DiffuseColor())) * sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] ) : 0;
+    specular_light += (dot > 0) ? (*(sources[i]->DiffuseColor())) * sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] ) : Color(0,0,0);
     diffuse_light += (*(sources[i]->SpecularColor())) * sphere->ReflectionConstants()[DIFFUSE] * ( normal * source_rays[i] );
   }
 
