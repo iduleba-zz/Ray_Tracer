@@ -64,9 +64,8 @@ int main(int argc, char* argv[]) {
 /*
 TODO list:
 28/05
-2.2, 3, 4 e 5
+2.2, 4 e 5
 29/05
-ler do arquivo os coeficientes
 add different colors for each light source intensity
 implement sum of colors and product by scalar
 */

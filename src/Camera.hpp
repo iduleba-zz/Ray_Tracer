@@ -22,6 +22,8 @@ class Camera{
     //RayTracer
     Color* RayTrace(Scene *scene, Ray ray);
 
+    Color* PhongReflection(Sphere *sphere, Vector point, Scene* scene);
+
   public:
     Camera(Vector *position, Vector *target);
     Camera(Vector *position, Vector *target, Vector *up);

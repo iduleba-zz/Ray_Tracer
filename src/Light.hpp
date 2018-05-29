@@ -15,7 +15,8 @@ class Light {
     Light(Vector *position);
     Light(Vector *position, Color *color);
     ~Light();
-
+    Color *Color_() const { return color; };
+    Vector *Position() const { return position; };
 };
 
 #endif
