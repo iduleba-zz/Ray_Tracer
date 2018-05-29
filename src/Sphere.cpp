@@ -1,4 +1,5 @@
 #include "Sphere.hpp"
+#include <cmath>
 
 Sphere::Sphere(Vector *position, float radius, Color *color) {
   this->position = position;
@@ -15,7 +16,7 @@ Vector* Normal(Vector at_point) {
 
   Vector* radial = at_point - position;
 
-  if(radial.Magnitude() != radius)
+  if(fabs(radial.Magnitude() - radius) < 0.0001)
     return nullptr;
 
   else {
