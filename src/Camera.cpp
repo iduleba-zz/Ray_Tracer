@@ -94,11 +94,11 @@ Image* Camera::Render(Scene *scene){
 Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
 
   Vector *normal = (sphere->Normal(point));
-
   vector<Light*> sources = scene->Sources();
-
-
   vector<Vector> reflected_rays, source_rays;
+
+  vector<Sphere*> spheres = scene->Spheres();
+
   for(int i = 0; i < scene->NumSources(); i++){
     //direction vectors from the point on the surface toward each light source
     Vector point_to_source = (*(sources[i]->Position()) - point);
@@ -119,10 +119,28 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
   Color diffuse_light = Color(0,0,0);
   Color specular_light = Color(0,0,0);
   for(int i = 0; i < scene->NumSources(); i++){
-    ambient_light += *(sources[i]->AmbientColor()) * sphere->ReflectionConstants()[AMBIENT];
+    //shadows
+    float shadow_coef1=1, shadow_coef2=1, shadow_coef3=1;
+    Vector point_to_source = (*(sources[i]->Position()) - point);
+    point_to_source.Normalize();
+    Ray ray = Ray(point, point_to_source);
+
+    for(int j=0; j<scene->NumSpheres(); ++j){
+      float t;
+      if(ray.Intersects(spheres[i],&t, &t)==true  && spheres[i] != sphere){
+        shadow_coef1=1;
+        shadow_coef2=0;
+        shadow_coef3=0.1;
+        break;
+      }
+    }
+
+    ambient_light += (*(sources[i]->AmbientColor()) * sphere->ReflectionConstants()[AMBIENT])*shadow_coef1;
     float dot = point_to_camera * reflected_rays[i];
     specular_light += (dot > 0) ? (*(sources[i]->DiffuseColor())) * sphere->ReflectionConstants()[SPECULAR] * pow( point_to_camera * reflected_rays[i], sphere->ReflectionConstants()[SHININESS] ) : Color(0,0,0);
+    specular_light = specular_light*shadow_coef2;
     diffuse_light += (*(sources[i]->SpecularColor())) * sphere->ReflectionConstants()[DIFFUSE] * ( (*normal) * source_rays[i] );
+    diffuse_light = diffuse_light*shadow_coef3;
   }
 
   delete normal;
