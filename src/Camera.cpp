@@ -1,5 +1,31 @@
 #include "Camera.hpp"
 
+Camera::Camera(const char* file){
+
+  width = 800;
+  height = 600;
+
+  FILE* f = fopen(file, "r");
+  if (f ==  NULL) {
+    fprintf(stderr, "ERR: Impossible to open %s\n", file);
+    throw -2;
+  }
+
+  int ret = fscanf(f, "%i %i", &width, &height);
+
+  float x, y, z;
+
+  // Reads attributes
+  ret = fscanf(f, "%f %f %f", &x, &y, &z);
+  position = new Vector(x, y, z);
+  ret = fscanf(f, "%f %f %f", &x, &y, &z);
+  target = new Vector(x, y, z);
+  ret = fscanf(f, "%f %f %f", &x, &y, &z);
+  up = new Vector(x, y, z);
+
+  fclose(f);
+}
+
 Camera::Camera(Vector *position, Vector *target) : Camera(position, target, new Vector(0,0,1)) {}
 
 Camera::Camera(Vector *position, Vector *target, Vector *up) {
@@ -56,7 +82,7 @@ Color* Camera::RayTrace(Scene *scene, Ray ray){
     //Color *illumination = PhongReflection(closest_sphere, ray.Position() + ray.Direction() * t_min, scene );
     //*illumination = *illumination + mesh_color;
     //return illumination;
-    Color illumination = Reflection(closest_sphere, ray.Position() + ray.Direction() * t_min, scene, ray.Direction(), 0.1);
+    Color illumination = Reflection(closest_sphere, ray.Position() + ray.Direction() * t_min, scene, ray.Direction(), closest_sphere->ReflectionConstants()[REFLECTIVITY]);
     return new Color(illumination);
   }
   else

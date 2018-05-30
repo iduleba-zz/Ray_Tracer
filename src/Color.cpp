@@ -1,5 +1,4 @@
 #include "Color.hpp"
-#include <algorithm>
 
 Color::Color(int red, int green, int blue){
   this->red = max(0,min(255,red));

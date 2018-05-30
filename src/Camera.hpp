@@ -29,6 +29,7 @@ class Camera{
     Color Reflection(Sphere *sphere, Vector point, Scene* scene, Vector incoming_ray, float r);
 
   public:
+    Camera(const char* file);
     Camera(Vector *position, Vector *target);
     Camera(Vector *position, Vector *target, Vector *up);
     Camera(Vector *position, Vector *target, Vector *up, int width, int height);

@@ -1,8 +1,7 @@
 #include "Scene.hpp"
 
 Scene::Scene(const char* file){
-  // Reads the number of instances and the feature dimension
-  // from the input file
+  // Reads the from the input file
 
   num_spheres = 0;
   num_sources = 0;

@@ -1,6 +1,5 @@
 #include "Sphere.hpp"
 
-
 Sphere::Sphere(Vector *position, float radius, Color *color, float ka, float kd, float ks, float sh, float refl) {
   this->position = position;
   this->radius = radius;
