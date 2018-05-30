@@ -182,6 +182,8 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
   Color diffuse_light = Color(0,0,0);
   Color specular_light = Color(0,0,0);
 
+  float* material = sphere->ReflectionConstants();
+
   //normal vector at the point
   Vector normal = sphere->Normal(point);
 
@@ -208,21 +210,17 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
     //loop through all spheres. If Ray intersects a sphere, this point will be in the shadow.
     float t;
     ClosestSphere(scene, ray, &t, sphere);
-    if(t!=-1){//there is a sphere in the path
-      shadow_ambient=1;
-      shadow_diffuse=0;
-      shadow_specular=0;
-    }
+    bool isShadow = (t>0);
 
-    ambient_light += *(sources[i]->AmbientColor()) * sphere->ReflectionConstants()[AMBIENT];
-    ambient_light = ambient_light * shadow_ambient;
+    ambient_light += *(sources[i]->AmbientColor()) * material[AMBIENT];
+    ambient_light = ambient_light;
 
     float dot = point_to_camera * reflected;
-    specular_light += (dot > 0) ? (*(sources[i]->DiffuseColor())) * sphere->ReflectionConstants()[SPECULAR] * pow( dot, sphere->ReflectionConstants()[SHININESS] ) : Color(0,0,0);
-    specular_light = specular_light*shadow_diffuse;
+    specular_light += (dot > 0) ? (*(sources[i]->DiffuseColor())) * material[SPECULAR] * pow( dot, sphere->ReflectionConstants()[SHININESS] ) : Color(0,0,0);
+    specular_light = specular_light * !isShadow;
 
-    diffuse_light += (*(sources[i]->SpecularColor())) * sphere->ReflectionConstants()[DIFFUSE] * ( normal * point_to_source );
-    diffuse_light = diffuse_light*shadow_specular;
+    diffuse_light += (*(sources[i]->SpecularColor())) * material[DIFFUSE] * ( normal * point_to_source );
+    diffuse_light = diffuse_light* !isShadow;
   }
 
   Color mesh_color = Color(sphere->Albedo());
