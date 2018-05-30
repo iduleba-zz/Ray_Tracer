@@ -115,7 +115,7 @@ Color Camera::Reflection(Sphere *sphere, Vector point, Scene* scene, Vector inco
   // chama PhongReflection na esfera que o raio intersectou
   // no final faz a conta somando a cor calculada da cor do nego.
 
-  float k = 0.01; // material constant representing the "reflectivity"
+  float k = sphere->ReflectionConstants()[REFLECTIVITY]; // material constant representing the "reflectivity"
 
   Color* c = PhongReflection(sphere, point, scene);
   Color cs = Color(c);
