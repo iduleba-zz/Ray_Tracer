@@ -141,8 +141,6 @@ Color Camera::Reflection(Sphere *sphere, Vector point, Scene* scene, Vector inco
   // chama PhongReflection na esfera que o raio intersectou
   // no final faz a conta somando a cor calculada da cor do nego.
 
-  float k = sphere->ReflectionConstants()[REFLECTIVITY]; // material constant representing the "reflectivity"
-
   Color* c = PhongReflection(sphere, point, scene);
   Color cs = Color(c);
   delete c;
@@ -163,6 +161,9 @@ Color Camera::Reflection(Sphere *sphere, Vector point, Scene* scene, Vector inco
   Sphere* closest_sphere = ClosestSphere(scene, Ray(point,reflected), &t_min, sphere);
 
   if(t_min >= 0){
+
+    float k = closest_sphere->ReflectionConstants()[REFLECTIVITY]; // material constant representing the "reflectivity"
+
 //cout << "t_min = " << t_min << endl;
 //cout << "dist-to-sphere" << (point + reflected * t_min - *(closest_sphere->Position())).Magnitude() << endl;
     Color cr = Reflection(closest_sphere, point + reflected * t_min, scene, reflected, r * k);
