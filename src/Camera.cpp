@@ -84,7 +84,7 @@ Color* Camera::RayTrace(Scene *scene, Ray ray){
   }
   else
   //return Background color;
-    return new Color(50,200,100);
+    return new Color(scene->BackgroundColor());
 }
 
 Image* Camera::Render(Scene *scene){

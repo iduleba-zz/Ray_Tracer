@@ -11,7 +11,11 @@ Scene::Scene(const char* file){
     throw -2;
   }
 
-  int ret = fscanf(f, "%i %i", &num_spheres, &num_sources);
+  int red, green, blue;
+  int ret = fscanf(f, "%i %i %i", &red, &green, &blue);
+  background_color = new Color(red, green, blue);
+
+  ret = fscanf(f, "%i %i", &num_spheres, &num_sources);
 
   for (int instance = 0; instance < num_spheres; ++instance) {
 
@@ -58,6 +62,10 @@ Scene::Scene(const char* file){
   }
 
   fclose(f);
+}
+
+Color* Scene::BackgroundColor(){
+  return background_color;
 }
 
 Scene::~Scene(){
