@@ -28,5 +28,12 @@ Color Color::operator*(const float& f) const{
 }
 
 void Color::operator+=(const Color& v){
-  this->red = this->red + v.red; this->green = this->green + v.green; this->blue = this->blue + v.blue;
+  this->red = this->red + v.red;
+  this->green = this->green + v.green;
+  this->blue = this->blue + v.blue;
+}
+
+
+Color Color::operator&(const Color& light) const{
+  return Color( (this->red * light.red) / 255, (this->green * light.green) / 255, (this->blue * light.blue) / 255);
 }

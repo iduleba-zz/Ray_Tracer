@@ -53,12 +53,11 @@ Color* Camera::RayTrace(Scene *scene, Ray ray){
   Sphere* closest_sphere = ClosestSphere(scene, ray, &t_min, nullptr);
 
   if(t_min >= 0){
-    Color mesh_color = Color(closest_sphere->Color_());
     //Color *illumination = PhongReflection(closest_sphere, ray.Position() + ray.Direction() * t_min, scene );
     //*illumination = *illumination + mesh_color;
     //return illumination;
     Color illumination = Reflection(closest_sphere, ray.Position() + ray.Direction() * t_min, scene, ray.Direction(), 0.1);
-    return new Color(illumination + mesh_color);
+    return new Color(illumination);
   }
   else
   //return Background color;
@@ -116,7 +115,7 @@ Color Camera::Reflection(Sphere *sphere, Vector point, Scene* scene, Vector inco
   // chama PhongReflection na esfera que o raio intersectou
   // no final faz a conta somando a cor calculada da cor do nego.
 
-  float k = 0.05; // material constant representing the "reflectivity"
+  float k = 0.01; // material constant representing the "reflectivity"
 
   Color* c = PhongReflection(sphere, point, scene);
   Color cs = Color(c);
@@ -200,5 +199,6 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
     diffuse_light = diffuse_light*shadow_specular;
   }
 
-  return new Color(ambient_light + diffuse_light + specular_light);
+  Color mesh_color = Color(sphere->Albedo());
+  return new Color(mesh_color + ambient_light + diffuse_light + specular_light);
 }

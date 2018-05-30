@@ -18,7 +18,7 @@ class Sphere {
 
     Vector* Position() const { return position;};
     float Radius() const { return radius;};
-    Color* Color_() const { return color;};
+    Color* Albedo() const { return color;};
     float* ReflectionConstants() const {return reflection_constants;};
 
     Vector Normal(Vector atPoint);

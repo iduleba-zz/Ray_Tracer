@@ -21,6 +21,7 @@ class Color {
     Color operator+(const Color& v) const;
     void operator+=(const Color& v);
     Color operator*(const float& f) const;
+    Color operator&(const Color& light) const;
 };
 
 #endif
