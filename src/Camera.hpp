@@ -35,8 +35,8 @@ class Camera{
     Camera(Vector *position, Vector *target, Vector *up, int width, int height);
     ~Camera();
 
-    int ScreenWidth() const { return Camera::width; };
-    int ScreenHeight() const { return Camera::height; };
+    int ScreenWidth() const { return width; };
+    int ScreenHeight() const { return height; };
     void SetScreenDimensions (int width, int height);
 
     Vector *Position() const { return position; };
@@ -44,7 +44,7 @@ class Camera{
     Vector *Up() const { return up; };
 
     //compute the image
-    Image* Render(Scene *scene);
+    Image* Render(Scene *scene, int start, int chunk);
 
 };
 

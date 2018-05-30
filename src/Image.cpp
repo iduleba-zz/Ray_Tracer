@@ -6,6 +6,12 @@ Image::Image(int width, int height){
   this->image = new Color*[width*height];
 }
 
+Image::Image(const Image& img) : Image(img.width, img.height){
+  for (unsigned i = 0; i < width * height; ++i) {
+    this->image[i] = new Color(img.image[i]);
+  }
+}
+
 Image::Image(int width, int height, unsigned int* unrolledTable) : Image(width, height){
   for (unsigned i = 0; i < width * height; ++i) {
     image[i] = new Color(unrolledTable[3 * i], unrolledTable[3 * i + 1], unrolledTable[3 * i + 2]);

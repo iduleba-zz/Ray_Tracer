@@ -2,9 +2,6 @@
 
 Camera::Camera(const char* file){
 
-  width = 800;
-  height = 600;
-
   FILE* f = fopen(file, "r");
   if (f ==  NULL) {
     fprintf(stderr, "ERR: Impossible to open %s\n", file);
@@ -87,7 +84,7 @@ Color* Camera::RayTrace(Scene *scene, Ray ray){
     return new Color(scene->BackgroundColor());
 }
 
-Image* Camera::Render(Scene *scene){
+Image* Camera::Render(Scene *scene, int start, int chunk){
   Image *image = new Image(width, height);
 
   //coping with the geometry
@@ -105,28 +102,38 @@ Image* Camera::Render(Scene *scene){
   //std::cout << "right: " << right.x << right.y << right.z << std::endl;
 
   //Ray Tracing
-  int count = 0;
-  for (unsigned y = 0; y < height; ++y) {
-    for (unsigned x = 0; x < width; ++x, ++count) {
-      //scaling factors
-      float xx = (2 * ((x + 0.5) * invWidth) - 1) * angle * aspectratio;
-      float yy = (1 - 2 * ((y + 0.5) * invHeight)) * angle;
+  //int count = 0;
+  //for (unsigned y = 0; y < height; ++y) {
+    //for (unsigned x = 0; x < width; ++x, ++count) {
 
-      Vector direction = foward + (*up)*xx+ right*yy;
-      direction.Normalize();
+    //for(unsigned i = start; i< start + chunk; ++i){
+    for(unsigned i = 0; i < height * width; ++i){
+      if(i>=start && i < start + chunk){
+        //scaling factors
+        //float xx = (2 * ((x + 0.5) * invWidth) - 1) * angle * aspectratio;
+        //float yy = (1 - 2 * ((y + 0.5) * invHeight)) * angle;
+        float xx = (2 * (((i%width) + 0.5) * invWidth) - 1) * angle * aspectratio;
+        float yy = (1 - 2 * (((i/width) + 0.5) * invHeight)) * angle;
 
-      //create ray from eye to pixel[x][y]
-      Ray ray = Ray(*position, direction);
+        Vector direction = foward + (*up)*xx+ right*yy;
+        direction.Normalize();
 
-      //std::cout << direction.x << direction.y << direction.z << std::endl;
-      //Call to the RayTracer algorithm
-      try{
-        image->ImageSet(count, RayTrace(scene, ray));
-      }catch(int e){
-        std::cout << "Exception(" << e << ") " << "Out of bounds! Index: " << count << std::endl;
+        //create ray from eye to pixel[x][y]
+        Ray ray = Ray(*position, direction);
+
+        //std::cout << direction.x << direction.y << direction.z << std::endl;
+        //Call to the RayTracer algorithm
+        try{
+          image->ImageSet(i, RayTrace(scene, ray));
+        }catch(int e){
+          std::cout << "Exception(" << e << ") " << "Out of bounds! Index: " << i << std::endl;
+        }
+      }else{
+        image->ImageSet(i, new Color(0,0,0));
       }
+
     }
-  }
+  //}
   return image;
 }
 
