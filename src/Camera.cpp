@@ -135,7 +135,7 @@ Color Camera::Reflection(Sphere *sphere, Vector point, Scene* scene, Vector inco
 
   // Calculation of the closest sphere
   float t_min;
-  Sphere* closest_sphere = ClosestSphere(scene, Ray(point,reflected), &t_min, nullptr);
+  Sphere* closest_sphere = ClosestSphere(scene, Ray(point,reflected), &t_min, sphere);
 
   if(t_min >= 0){
     cout << (point + reflected * t_min - *(closest_sphere->Position())).Magnitude() << endl;
