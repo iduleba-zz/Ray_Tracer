@@ -15,7 +15,7 @@ TEMP = temp
 FILES = $(COLOR).cpp $(VECTOR).cpp $(LIGHT).cpp $(SPHERE).cpp $(RAY).cpp $(IMAGE).cpp $(SCENE).cpp $(CAMERA).cpp
 OBJECTS = $(patsubst %.cpp,$(TEMP)/%.o,$(FILES))
 
-GCC = g++
+GCC = g++ -std=c++11
 
 all : $(OUTPUT)
 
