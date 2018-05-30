@@ -69,6 +69,7 @@ Color* Scene::BackgroundColor(){
 }
 
 Scene::~Scene(){
+  delete background_color;
   if(num_spheres!=0){
     for (unsigned int i = 0; i < spheres.size(); ++i) {
       delete(spheres[i]);
