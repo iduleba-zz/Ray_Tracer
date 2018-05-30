@@ -16,7 +16,7 @@ FILES = $(COLOR).cpp $(VECTOR).cpp $(LIGHT).cpp $(SPHERE).cpp $(RAY).cpp $(IMAGE
 OBJECTS = $(patsubst %.cpp,$(TEMP)/%.o,$(FILES))
 
 GCC = g++ -std=c++11
-MPI = mpic++
+MPI = mpic++ -std=c++11
 
 all : $(OUTPUT)
 

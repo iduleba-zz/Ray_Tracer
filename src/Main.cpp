@@ -72,7 +72,7 @@ int main(int argc, char* argv[]) {
   cout <<"Rendering Image"<< endl;
 
   //test image
-  Image* img = cam->Render(scene, rank, size);
+  Image* img = cam->Render(scene);
 
   cout <<"...Done" << endl;
 
