@@ -6,6 +6,12 @@ Image::Image(int width, int height){
   this->image = new Color*[width*height];
 }
 
+Image::Image(int width, int height, unsigned int* unrolledTable) : Image(width, height){
+  for (unsigned i = 0; i < width * height; ++i) {
+    image[i] = new Color(unrolledTable[3 * i], unrolledTable[3 * i + 1], unrolledTable[3 * i + 2]);
+  }
+}
+
 Image::~Image(){
   if(this->image!=NULL){
     for (unsigned i = 0; i < width * height; ++i) {
@@ -18,6 +24,27 @@ Image::~Image(){
 void Image::ImageSet(unsigned i, Color *color) {
   if (i>=width*height) throw -i;
   this->image[i] = color;
+}
+
+unsigned int* Image::ToArray() const {
+  unsigned int* unrolledTable = new unsigned int[3 * width * height];
+  for (unsigned i = 0; i < width * height; ++i) {
+    unrolledTable[3*i] = (unsigned int) image[i]->Red();
+    unrolledTable[3*i+1] = (unsigned int) image[i]->Green();
+    unrolledTable[3*i+2] = (unsigned int) image[i]->Blue();
+  }
+  return unrolledTable;
+}
+
+Image Image::operator+(const Image& other) const {
+  if(this->width != other.width || this->height != other.height)
+    std::cerr << "Error adding images: Sizes aren't consistent!" << endl;
+
+  Image img = Image(width, height);
+  for (unsigned i = 0; i < width * height; ++i) {
+    img.image[i] = new Color(*(this->image[i]) + *(other.image[i]));
+  }
+  return img;
 }
 
 // Save PPM image

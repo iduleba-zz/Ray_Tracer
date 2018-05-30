@@ -3,6 +3,7 @@
 
 #include "Color.hpp"
 #include <fstream>
+#include <iostream>
 
 class Image {
 
@@ -13,6 +14,7 @@ class Image {
 
   public:
     Image(int width, int height);
+    Image(int width, int height, unsigned int* unrolledTable);
     ~Image();
 
     int ImageWidth() const { return width; };
@@ -23,6 +25,9 @@ class Image {
     //http://manpages.ubuntu.com/manpages/xenial/man5/ppm.5.html
     void ExportPPM(const char* fileName);
 
+    unsigned int* ToArray() const;
+
+    Image operator+(const Image& img) const;
 };
 
 #endif
