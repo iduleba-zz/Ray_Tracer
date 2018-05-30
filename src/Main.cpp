@@ -3,7 +3,7 @@
 #include "Camera.hpp"
 #include "Scene.hpp"
 #include "Ray.hpp"
-//#include <mpi.h>
+#include <mpi.h>
 
 using namespace std;
 
@@ -29,6 +29,12 @@ void printHelp(){
 }
 
 int main(int argc, char* argv[]) {
+  MPI_Init(&argc, &argv);
+  int rank, size;
+  MPI_Status status;
+  MPI_Comm_size(MPI_COMM_WORLD, &size);
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
   cout <<"Ray Tracer v1.0.\n" << endl;
 
   if (argc != 4){
@@ -66,7 +72,7 @@ int main(int argc, char* argv[]) {
   cout <<"Rendering Image"<< endl;
 
   //test image
-  Image* img = cam->Render(scene);
+  Image* img = cam->Render(scene, rank, size);
 
   cout <<"...Done" << endl;
 
@@ -81,6 +87,7 @@ int main(int argc, char* argv[]) {
   delete cam;
   delete img;
 
+  MPI_Finalize();
   return 0;
 }
 
