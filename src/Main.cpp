@@ -3,6 +3,7 @@
 #include "Camera.hpp"
 #include "Scene.hpp"
 #include "Ray.hpp"
+//#include <mpi.h>
 
 using namespace std;
 
