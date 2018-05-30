@@ -14,6 +14,7 @@ class Image {
 
   public:
     Image(int width, int height);
+    Image(const Image& img);
     Image(int width, int height, unsigned int* unrolledTable);
     ~Image();
 

@@ -21,10 +21,10 @@ MPI = mpic++ -std=c++11
 all : $(OUTPUT)
 
 $(OUTPUT) : $(OBJECTS) $(TEMP)/Main.o
-	$(MPI) -g $(INCLUDES) -o $(BIN)/$@ $^ $(LIBS)
+	$(GCC) -g $(INCLUDES) -o $(BIN)/$@ $^ $(LIBS)
 
 $(TEMP)/%.o: $(SRC)/%.cpp
-	$(MPI) -g -c $< -o $@
+	$(GCC) -g -c $< -o $@
 
 .PHONY: clean
 
