@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
   try{
       cam = new Camera(camera_file);
   }catch (int e){
-    cout << "File \""<< argv[1] <<"\" not found!\n" << endl;
+    cout << "File \""<< camera_file <<"\" not found!\n" << endl;
     printHelp();
     return -1;
   }
@@ -56,17 +56,20 @@ int main(int argc, char* argv[]) {
   try{
     scene = new Scene(spheres_and_sources_file);
   }catch (int e){
-    cout << "File \""<< argv[1] <<"\" not found!\n" << endl;
+    cout << "File \""<< spheres_and_sources_file <<"\" not found!\n" << endl;
     printHelp();
     return -1;
   }
 
   cout <<"...Done" << endl;
-
-  cout <<"Exporting image to " << outputImg << endl;
+  cout <<"Rendering Image"<< endl;
 
   //test image
   Image* img = cam->Render(scene);
+
+  cout <<"...Done" << endl;
+
+  cout <<"Exporting image to " << outputImg << endl;
   img->ExportPPM(outputImg);//"./untitled1.ppm"
 
   cout <<"...Done" << endl;
