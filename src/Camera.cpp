@@ -79,9 +79,6 @@ Color* Camera::RayTrace(Scene *scene, Ray ray){
   Sphere* closest_sphere = ClosestSphere(scene, ray, &t_min, nullptr);
 
   if(t_min >= 0){
-    //Color *illumination = PhongReflection(closest_sphere, ray.Position() + ray.Direction() * t_min, scene );
-    //*illumination = *illumination + mesh_color;
-    //return illumination;
     Color illumination = Reflection(closest_sphere, ray.Position() + ray.Direction() * t_min, scene, ray.Direction(), closest_sphere->ReflectionConstants()[REFLECTIVITY]);
     return new Color(illumination);
   }
@@ -135,16 +132,11 @@ Image* Camera::Render(Scene *scene){
 
 Color Camera::Reflection(Sphere *sphere, Vector point, Scene* scene, Vector incoming_ray, float r){
 
-  // if intensidade é maior q um delta
-  // calcula o raio refletido, que é o espelhado do que chega em relacao a normal.
-  // testa se esse raio intersecta uma esfera
-  // chama PhongReflection na esfera que o raio intersectou
-  // no final faz a conta somando a cor calculada da cor do nego.
-
   Color* c = PhongReflection(sphere, point, scene);
   Color cs = Color(c);
   delete c;
 
+  // End condition: if the composite reflectivity constant is smaller than 1/255 bounced light will not affect our original object
   if(r < 0.0039)
     return (cs);
 
