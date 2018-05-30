@@ -31,7 +31,7 @@ bool Ray::Intersects(Sphere *S, float *t1, float *t2){
     delta = S->Radius() * S->Radius() - orth_magnitude * orth_magnitude;
     *t2 = proj_magnitude - sqrtf(delta);
     *t1 = proj_magnitude + sqrtf(delta);
-
+//cout << "Proj_mag " << proj_magnitude << "Delta " << sqrtf(delta) << endl;
     return true;
   }
 
@@ -39,9 +39,9 @@ bool Ray::Intersects(Sphere *S, float *t1, float *t2){
   else if(ray_to_sphere * (this->direction) >= 0 && orth_magnitude <= S->Radius()){
 
     delta = S->Radius() * S->Radius() - orth_magnitude * orth_magnitude;
-    *t1 = proj_magnitude - sqrtf(delta);
     *t2 = proj_magnitude + sqrtf(delta);
-
+    *t1 = proj_magnitude - sqrtf(delta);
+//cout << "Proj_mag " << proj_magnitude << "Delta " << sqrtf(delta) << endl;
     return true;
   }
 

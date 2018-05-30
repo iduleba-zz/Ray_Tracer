@@ -28,7 +28,7 @@ void Camera::SetScreenDimensions(int width, int height){
 
 // Returns the first sphere reached by the ray.
 // t_min represents the parametrized index of the ray where the first intersection occurs. Default value is -1 if no sphere is found.
-// the sphere parameter determines
+// the sphere parameter determines if the method should ignore a particular sphere, i.e., if the ray leaves such sphere
 Sphere* Camera::ClosestSphere(Scene *scene, Ray ray, float *t_min, Sphere* sphere){
   *(t_min) = -1;
   int sphere_index;
@@ -116,9 +116,9 @@ Color Camera::Reflection(Sphere *sphere, Vector point, Scene* scene, Vector inco
   // chama PhongReflection na esfera que o raio intersectou
   // no final faz a conta somando a cor calculada da cor do nego.
 
-  float k = 0.2; // material constant representing the "reflectivity"
+  float k = 0.05; // material constant representing the "reflectivity"
 
-  Color* c = PhongReflection(sphere, point, scene); // needs to be deleted -> memory leak
+  Color* c = PhongReflection(sphere, point, scene);
   Color cs = Color(c);
   delete c;
 
@@ -128,9 +128,9 @@ Color Camera::Reflection(Sphere *sphere, Vector point, Scene* scene, Vector inco
   //normal vector at the point
   Vector normal = sphere->Normal(point);
   // the projection onto the vector normal to the sphere
-  Vector proj = normal * (normal * incoming_ray);
+  Vector proj = normal * (normal * incoming_ray) * (-1);
   // direction vectors representing the reflected ray
-  Vector reflected = proj * 2 - incoming_ray;
+  Vector reflected = proj * 2 + incoming_ray;
   reflected.Normalize();
 
   // Calculation of the closest sphere
@@ -138,12 +138,14 @@ Color Camera::Reflection(Sphere *sphere, Vector point, Scene* scene, Vector inco
   Sphere* closest_sphere = ClosestSphere(scene, Ray(point,reflected), &t_min, sphere);
 
   if(t_min >= 0){
-    cout << (point + reflected * t_min - *(closest_sphere->Position())).Magnitude() << endl;
-    Color cr = Reflection(closest_sphere, point + reflected * t_min, scene, reflected, r * k); // needs to be deleted -> memory leak
+//cout << "t_min = " << t_min << endl;
+//cout << "dist-to-sphere" << (point + reflected * t_min - *(closest_sphere->Position())).Magnitude() << endl;
+    Color cr = Reflection(closest_sphere, point + reflected * t_min, scene, reflected, r * k);
     return cr * r + (cs) * (1-r);
   }
-  else
+  else{//does not intersects with another sphere
     return (cs);
+  }
 }
 
 Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
@@ -184,7 +186,7 @@ Color* Camera::PhongReflection(Sphere *sphere, Vector point, Scene* scene){
     if(t!=-1){//there is a sphere in the path
       shadow_ambient=1;
       shadow_diffuse=0;
-      shadow_specular=0.1;
+      shadow_specular=0;
     }
 
     ambient_light += *(sources[i]->AmbientColor()) * sphere->ReflectionConstants()[AMBIENT];
