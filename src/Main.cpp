@@ -125,6 +125,7 @@ int main(int argc, char* argv[]) {
   //ExportingImage(rank, img, outputImg);
   if(rank==0){
     cout <<"Process "<<rank+1<<"/"<<size<<": Exporting image to " << outputImg << endl;
+    img->ExportPPM(outputImg);
     cout <<"...Done" << endl;
   }
 
