@@ -48,11 +48,11 @@
     ______________________________________________________________________________________________________
 
 ###### REFLECTION COEFFICIENTS:
-######  •_[Ka]  AMBIENT REFLECTION COEFFICIENT_: determines how much the material shall be influenced by ambient light (light coming equally from all directions).
-######  •_[Kd]  DIFFUSE REFLECTION COEFFICIENT_: diffuse surfaces are microscopically irregular, and scatter reflected light (see Lambertian reflectance).
-######  •_[Ks]  SPECULAR REFLECTION COEFFICIENT_: specular surfaces are smooth and possess close to mirror-like behaviour.
-######  •_[SH]  SHININESS REFLECTION COEFFICIENT_: materials have smaller yet more instense specular reflections. 
-######  •_[MET] METALLICNESS_: increases indirect light reflection. Metallicness, speculariy and shinyness are thus directly related.
+######  •_Ka - AMBIENT REFLECTION COEFFICIENT_: determines how much the material shall be influenced by ambient light (light coming equally from all directions).
+######  •_Kd - DIFFUSE REFLECTION COEFFICIENT_: diffuse surfaces are microscopically irregular, and scatter reflected light (see Lambertian reflectance).
+######  •_Ks - SPECULAR REFLECTION COEFFICIENT_: specular surfaces are smooth and possess close to mirror-like behaviour.
+######  •_SH - SHININESS REFLECTION COEFFICIENT_: materials have smaller yet more instense specular reflections. 
+######  •_MET - METALLIC CONSTANT_: increases indirect light reflection. Metallicness, speculariy and shinyness are thus directly related.
           
 _[Note that many surfaces have both a diffuse and a specular component.]_
 
