@@ -37,7 +37,7 @@
     | uint uint                           | #spheres #sources   = number of objects in the scene         |
     ______________________________________________________________________________________________________
 
-• For each sphere in [1, #spheres], four lines will be read:
+• For each sphere in [1,..., #spheres], four lines will be read:
 
               Format                    |     Corresponding Interpretation
     ______________________________________________________________________________________________________
@@ -58,7 +58,7 @@ _[Note that many surfaces have both a diffuse and a specular component.]_
 
 _[For more information on the Reflection Consstants see [Phong Model](https://en.wikipedia.org/wiki/Phong_reflection_model)]_
 
-• For each light source in [1, #sources], four lines will be read:
+• For each light source in [1,..., #sources], four lines will be read:
 
                  Format                 |     Corresponding Interpretation
     ______________________________________________________________________________________________________
