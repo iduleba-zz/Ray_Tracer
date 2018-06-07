@@ -1,5 +1,8 @@
 # Ray_Tracer
 
+###### To distribute the execution of this program to multiple processes, switch to branch MPI (Message Passing Interface)
+
+
 ### **Complilation**
 
  • Firstly, one needs to compile the source code. That task was simplified with the aid of a Makefile: in a console from within the project's root folder, simply type:
@@ -56,7 +59,7 @@
           
 _[Note that many surfaces have both a diffuse and a specular component.]_
 
-_[For more information on the Reflection Consstants see [Phong Model](https://en.wikipedia.org/wiki/Phong_reflection_model)]_
+_[For more information on the Reflection Constants see [Phong Model](https://en.wikipedia.org/wiki/Phong_reflection_model)]_
 
 • For each light source in [1,..., #sources], four lines will be read:
 
