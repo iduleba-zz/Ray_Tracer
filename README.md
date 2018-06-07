@@ -21,46 +21,51 @@
 
 ##### A) The <camera_file> contains all the camera parameters: its position, rotation and resolution. It must follow the format discribed on the table's left column, which will be interpretated accordingly:
 
-          Format        |     Corresponding Interpretation
-    ________________________________________________________________________________________
-    int int             |    Width Height     =   resolution of the camera
-    float float float   |   X     Y     Z     =   position of the camera
-    float float float   |   X     Y     Z     =   position of the target the camera is looking towards
-    float float float   |   X     Y     Z     =   vector representing the upwards direction
+          Format          |     Corresponding Interpretation
+    ______________________________________________________________________________________________________
+    | int int             |    Width Height     =   resolution of the camera                             |
+    | float float float   |   X     Y     Z     =   position of the camera                               |
+    | float float float   |   X     Y     Z     =   position of the target the camera is looking towards |
+    | float float float   |   X     Y     Z     =   vector representing the upwards direction            |
+    ______________________________________________________________________________________________________
 
 ##### B) The <scene_file> contains all the objects in the scene (spheres and sources) as well the background colour. It must follow the format discribed on the table's left column, which will be interpretated accordingly:
 
-                 Format                 |     Corresponding Interpretation
-    ________________________________________________________________________________________
-    int[0-255] int[0-255] int[0-255]    | Red  Green  Blue    = background color
-    uint uint                           | #spheres #sources   = number of objects in the scene
+                 Format                   |     Corresponding Interpretation
+    ______________________________________________________________________________________________________
+    | int[0-255] int[0-255] int[0-255]    | Red  Green  Blue    = background color                       |
+    | uint uint                           | #spheres #sources   = number of objects in the scene         |
+    ______________________________________________________________________________________________________
 
-###### For each sphere in [1, #spheres], four lines will be read:
+• For each sphere in [1, #spheres], four lines will be read:
 
-              Format              |     Corresponding Interpretation
-    _________________________________________________________________________________________
-    float                             |         Radius                = radius of the sphere
-    float float float float           | amb dif spec shinny metallic  = reflection coefficients
-    int[0-255] int[0-255] int[0-255]  |  Red  Green  Blue             = color of the sphere
-    float float float                 |   X     Y     Z               = center of the sphere
+              Format                    |     Corresponding Interpretation
+    ______________________________________________________________________________________________________
+    | float                             |         Radius                = radius of the sphere           |
+    | float float float float           | Ka Kd Ks SH MET               = reflection coefficients        |
+    | int[0-255] int[0-255] int[0-255]  |  Red  Green  Blue             = color of the sphere            |
+    | float float float                 |   X     Y     Z               = center of the sphere           |
+    ______________________________________________________________________________________________________
 
 ###### REFLECTION COEFFICIENTS:
-###### -_[Ka]  AMBIENT REFLECTION COEFFICIENT_: determines how much the material shall be influenced by ambient light (light coming equally from all directions).
-###### -_[Kd]  DIFFUSE REFLECTION COEFFICIENT_: diffuse surfaces are microscopically irregular, and scatter reflected light (see Lambertian reflectance).
-###### -_[Ks]  SPECULAR REFLECTION COEFFICIENT_: specular surfaces are smooth and possess close to mirror-like behaviour.
-###### -_[SH]  SHININESS REFLECTION COEFFICIENT_: materials have smaller yet more instense specular reflections. 
-###### -_[MET] METALLICNESS_: increases indirect light reflection. Metallicness, speculariy and shinyness are thus directly related.
+######  •_[Ka]  AMBIENT REFLECTION COEFFICIENT_: determines how much the material shall be influenced by ambient light (light coming equally from all directions).
+######  •_[Kd]  DIFFUSE REFLECTION COEFFICIENT_: diffuse surfaces are microscopically irregular, and scatter reflected light (see Lambertian reflectance).
+######  •_[Ks]  SPECULAR REFLECTION COEFFICIENT_: specular surfaces are smooth and possess close to mirror-like behaviour.
+######  •_[SH]  SHININESS REFLECTION COEFFICIENT_: materials have smaller yet more instense specular reflections. 
+######  •_[MET] METALLICNESS_: increases indirect light reflection. Metallicness, speculariy and shinyness are thus directly related.
           
-#### [Note that many surfaces have both a diffuse and a specular component.]
-#### [For more information see [Phong Model](https://en.wikipedia.org/wiki/Phong_reflection_model)]
+_[Note that many surfaces have both a diffuse and a specular component.]_
 
-#### For each light source in [1, #sources], four lines will be read:
+_[For more information on the Reflection Consstants see [Phong Model](https://en.wikipedia.org/wiki/Phong_reflection_model)]_
+
+• For each light source in [1, #sources], four lines will be read:
 
                  Format                 |     Corresponding Interpretation
-    ________________________________________________________________________________________
-    int[0-255] int[0-255] int[0-255]    | Red Green Blue   =   ambient component of the light
-    int[0-255] int[0-255] int[0-255]    | Red Green Blue   =   diffuse component of the light
-    int[0-255] int[0-255] int[0-255]    | Red Green Blue   =   specular component of the light
+    ______________________________________________________________________________________________________
+    | int[0-255] int[0-255] int[0-255]    | Red Green Blue   =   ambient component of the light          |
+    | int[0-255] int[0-255] int[0-255]    | Red Green Blue   =   diffuse component of the light          |
+    | int[0-255] int[0-255] int[0-255]    | Red Green Blue   =   specular component of the light         |
+    ______________________________________________________________________________________________________
 
 
-#### [Note that spaces between lines is acceptable for both file formats.]
+_[Note that spaces between lines is acceptable for both file formats.]_
