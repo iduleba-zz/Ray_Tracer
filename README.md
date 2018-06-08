@@ -44,10 +44,10 @@
 
               Format                    |     Corresponding Interpretation
     ______________________________________________________________________________________________________
-    | float                             |      Radius                   = radius of the sphere           |
-    | float float float float           |  Ka Kd Ks SH MET              = reflection coefficients        |
-    | int[0-255] int[0-255] int[0-255]  |  Red  Green  Blue             = color of the sphere            |
-    | float float float                 |   X     Y     Z               = center of the sphere           |
+    | float                             |      Radius            = radius of the sphere                  |
+    | float float float float           |  Ka Kd Ks SH MET       = reflection coefficients               |
+    | int[0-255] int[0-255] int[0-255]  |  Red  Green  Blue      = color of the sphere                   |
+    | float float float                 |   X     Y     Z        = center of the sphere                  |
     ______________________________________________________________________________________________________
 
 ###### REFLECTION COEFFICIENTS:
